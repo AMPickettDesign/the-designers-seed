@@ -111,18 +111,18 @@ function Landing({ onSelect }) {
             </div>
 
             {/* Right — visual area */}
-            <div style={{flex:1,display:'flex',alignItems:'center',justifyContent:'center',position:'relative'}}>
-              <div style={{
-                width:'100%',maxWidth:480,aspectRatio:'4 / 3',borderRadius:24,
-                background:'linear-gradient(135deg, var(--border-light) 0%, var(--card) 100%)',
-                border:'1px solid var(--border-light)',
-                display:'flex',alignItems:'center',justifyContent:'center',
-                overflow:'hidden',position:'relative',
-              }}>
-                <div style={{position:'absolute',top:'-20%',right:'-10%',width:'60%',height:'60%',borderRadius:'50%',background:'radial-gradient(circle,rgba(93,44,115,0.08) 0%,transparent 70%)',pointerEvents:'none'}} />
-                <div style={{position:'absolute',bottom:'-15%',left:'-5%',width:'50%',height:'50%',borderRadius:'50%',background:'radial-gradient(circle,rgba(3,120,166,0.06) 0%,transparent 70%)',pointerEvents:'none'}} />
-                <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:13,color:'var(--text-helper)',letterSpacing:'0.04em'}}>Portfolio preview</p>
-              </div>
+            <div style={{flex:1,display:'flex',alignItems:'center',justifyContent:'center',position:'relative',overflow:'visible'}}>
+              <img 
+                src="/hero-image.png" 
+                alt="Portfolio hero image" 
+                style={{
+                  width:'100%',
+                  maxWidth:600,
+                  height:'auto',
+                  borderRadius:24,
+                  objectFit:'cover',
+                }} 
+              />
             </div>
           </div>
         </div>
@@ -142,7 +142,7 @@ function Landing({ onSelect }) {
             onMouseLeave={(e)=>e.currentTarget.style.background='var(--accent)'}
             >Contact</a>
           </header>
-          <div style={{margin:'20px auto 0',width:'calc(100% - 40px)',maxWidth:400,borderRadius:14,overflow:'hidden',background:'var(--border-light)',aspectRatio:'16 / 9'}} />
+          <img src="/hero-image.png" alt="Portfolio hero image" style={{margin:'20px auto 0',width:'calc(100% - 40px)',maxWidth:400,borderRadius:14,objectFit:'cover'}} />
           <div className="animate-in" style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',padding:'28px 24px 0',textAlign:'center',width:'100%'}}>
             <h2 style={{fontFamily:"'Playfair Display', serif",fontSize:30,fontWeight:600,color:'var(--text)',marginBottom:10}}>Welcome</h2>
             <p style={{fontSize:15,color:'var(--text-secondary)',maxWidth:340,lineHeight:1.65,marginBottom:24,textWrap:'balance'}}>
@@ -223,15 +223,18 @@ function Landing({ onSelect }) {
           </div>
 
           {/* Right — visual area */}
-          <div style={{flex:1,display:'flex',alignItems:'center',justifyContent:'center'}}>
-            <div style={{
-              width:'100%',maxWidth:480,aspectRatio:'4 / 3',borderRadius:24,
-              background:'linear-gradient(135deg, var(--border) 0%, var(--card) 100%)',
-              border:'1px solid var(--border)',
-              display:'flex',alignItems:'center',justifyContent:'center',
-            }}>
-              <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:13,color:'var(--text-secondary)',letterSpacing:'0.04em'}}>Project workspace</p>
-            </div>
+          <div style={{flex:1,display:'flex',alignItems:'center',justifyContent:'center',position:'relative',overflow:'visible'}}>
+            <img 
+              src="/hero-image.png" 
+              alt="Portfolio hero image" 
+              style={{
+                width:'100%',
+                maxWidth:600,
+                height:'auto',
+                borderRadius:24,
+                objectFit:'cover',
+              }} 
+            />
           </div>
         </div>
       </div>
@@ -251,7 +254,7 @@ function Landing({ onSelect }) {
           onMouseLeave={(e)=>e.currentTarget.style.background='var(--accent)'}
           >Contact</a>
         </header>
-        <div style={{margin:'20px auto 0',width:'calc(100% - 40px)',maxWidth:400,borderRadius:14,overflow:'hidden',background:'var(--card)',aspectRatio:'16 / 9'}} />
+        <img src="/hero-image.png" alt="Portfolio hero image" style={{margin:'20px auto 0',width:'calc(100% - 40px)',maxWidth:400,borderRadius:14,objectFit:'cover'}} />
         <div className="animate-in" style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',padding:'28px 24px 0',textAlign:'center',width:'100%'}}>
           <h2 style={{fontFamily:"'Playfair Display', serif",fontSize:28,fontWeight:600,color:'var(--text)',marginBottom:10}}>Project Metadata</h2>
           <p style={{fontSize:14,color:'var(--text-secondary)',marginBottom:28,lineHeight:1.6,maxWidth:320,textWrap:'balance'}}>
