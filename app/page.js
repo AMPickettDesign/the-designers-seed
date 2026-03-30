@@ -442,6 +442,40 @@ function BriefForm({ sections, version, accentColor, isDark, onSubmit, onBack, i
   );
   const totalFields = sections.reduce((a, s) => a + s.fields.length, 0);
 
+  const currentSectionEmptyFields = section.fields.filter((f) => {
+    const v = data[f.key];
+    return !v || (Array.isArray(v) ? v.length === 0 : !v.toString().trim());
+  });
+
+  const handleNext = () => {
+    if (currentSectionEmptyFields.length > 0) {
+      const fieldsList = currentSectionEmptyFields.map((f) => f.label || f.key).join(', ');
+      const confirmed = window.confirm(
+        `You have ${currentSectionEmptyFields.length} empty field${currentSectionEmptyFields.length > 1 ? 's' : ''} in this section:\n\n"${fieldsList}"\n\nAre you sure you want to leave these blank and continue?`
+      );
+      if (!confirmed) return;
+    }
+    setStep(step + 1);
+  };
+
+  const handleSubmit = () => {
+    const allEmptyFields = sections.flatMap((sec) =>
+      sec.fields.filter((f) => {
+        const v = data[f.key];
+        return !v || (Array.isArray(v) ? v.length === 0 : !v.toString().trim());
+      })
+    );
+    if (allEmptyFields.length > 0) {
+      const fieldsList = allEmptyFields.slice(0, 5).map((f) => f.label || f.key).join(', ');
+      const more = allEmptyFields.length > 5 ? `\n\n...and ${allEmptyFields.length - 5} more` : '';
+      const confirmed = window.confirm(
+        `You have ${allEmptyFields.length} empty field${allEmptyFields.length > 1 ? 's' : ''} across the form:\n\n"${fieldsList}"${more}\n\nAre you sure you want to submit without these?`
+      );
+      if (!confirmed) return;
+    }
+    onSubmit(data);
+  };
+
   const themeProps = isDark ? { 'data-theme': 'dark' } : {};
 
   return (
@@ -573,7 +607,7 @@ function BriefForm({ sections, version, accentColor, isDark, onSubmit, onBack, i
 
           {step < sections.length - 1 ? (
             <button
-              onClick={() => setStep(step + 1)}
+              onClick={handleNext}
               style={{
                 padding: '10px 24px', borderRadius: 10, border: 'none',
                 background: accentColor, color: '#ffffff',
@@ -585,7 +619,7 @@ function BriefForm({ sections, version, accentColor, isDark, onSubmit, onBack, i
             </button>
           ) : (
             <button
-              onClick={() => onSubmit(data)}
+              onClick={handleSubmit}
               style={{
                 padding: '10px 24px', borderRadius: 10, border: 'none',
                 background: isDark ? '#00DBBE' : accentColor,
