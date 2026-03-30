@@ -118,16 +118,16 @@ function Landing({ onSelect }) {
             </div>
 
             {/* Right — visual area */}
-            <div style={{flex:1,display:'flex',alignItems:'center',justifyContent:'center',position:'relative',overflow:'visible'}}>
+            <div style={{flex:1,display:'flex',alignItems:'stretch',position:'relative',overflow:'visible'}}>
               <img 
                 src="/hero-image.png" 
                 alt="Portfolio hero image" 
                 style={{
                   width:'100%',
-                  maxWidth:600,
-                  height:'auto',
-                  borderRadius:24,
+                  height:'100%',
                   objectFit:'cover',
+                  borderRadius:24,
+                  minHeight:500,
                 }} 
               />
             </div>
