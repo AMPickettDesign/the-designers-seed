@@ -110,7 +110,7 @@ export function ChipSelect({ field, value, onChange }) {
                 padding: '8px 18px', borderRadius: 100,
                 border: `2px solid ${active ? 'var(--accent)' : 'var(--input-border)'}`,
                 background: active ? 'var(--accent)' : 'transparent',
-                color: active ? 'var(--text-on-purple)' : 'var(--text-secondary)',
+                color: active ? 'var(--text-on-accent)' : 'var(--text-secondary)',
                 fontSize: 14, fontWeight: active ? 600 : 400,
                 cursor: 'pointer', transition: 'all 0.15s ease',
                 fontFamily: 'inherit',

@@ -10,35 +10,31 @@ function Landing({ onSelect }) {
   const isDesigner = mode === 'designer';
 
   const Toggle = () => (
-    <div style={{
+    <div className="glass" style={{
       position:'fixed',bottom:28,left:'50%',transform:'translateX(-50%)',
       zIndex:30,display:'flex',alignItems:'center',
-      background:isDesigner?'#18141f':'#ffffff',
-      border:'1px solid '+(isDesigner?'#2e2640':'#e8e3f0'),
       borderRadius:100,padding:4,
-      boxShadow:isDesigner?'0 8px 32px rgba(0,0,0,0.5)':'0 8px 32px rgba(26,16,37,0.10)',
-      transition:'all 0.4s ease',
     }}>
       <button onClick={()=>setMode('client')} style={{
         padding:'10px 22px',borderRadius:100,border:'none',
-        fontFamily:'inherit',fontSize:12,fontWeight:600,
+        fontFamily:"'Sarabun', sans-serif",fontSize:13,fontWeight:600,
         letterSpacing:'0.06em',textTransform:'uppercase',
         cursor:'pointer',transition:'all 0.3s ease',
-        background:!isDesigner?'#1a1025':'transparent',
-        color:!isDesigner?'#ffffff':'#5a5a60',whiteSpace:'nowrap',
+        background:!isDesigner?'var(--accent)':'transparent',
+        color:!isDesigner?'#ffffff':'var(--text-secondary)',whiteSpace:'nowrap',
       }}>Clientele</button>
       <button onClick={()=>setMode('designer')} style={{
         padding:'10px 22px',borderRadius:100,border:'none',
-        fontFamily:'inherit',fontSize:12,fontWeight:600,
+        fontFamily:"'Sarabun', sans-serif",fontSize:13,fontWeight:600,
         letterSpacing:'0.06em',textTransform:'uppercase',
         cursor:'pointer',transition:'all 0.3s ease',
-        background:isDesigner?'#7F63C1':'transparent',
-        color:isDesigner?'#ffffff':'#655a78',whiteSpace:'nowrap',
+        background:isDesigner?'var(--purple-soft)':'transparent',
+        color:isDesigner?'#ffffff':'var(--text-secondary)',whiteSpace:'nowrap',
       }}>Designer</button>
     </div>
   );
 
-  const Socials = ({ size=42, bg='#f0ecf5', color='#655a78', hoverBg, hoverColor }) => (
+  const Socials = ({ size=42, bg='var(--border-light)', color='var(--text-helper)' }) => (
     <div style={{display:'flex',gap:14,justifyContent:'center'}}>
       {['dribbble','behance','instagram','linkedin'].map((s)=>(
         <div key={s} style={{
@@ -46,91 +42,91 @@ function Landing({ onSelect }) {
           display:'flex',alignItems:'center',justifyContent:'center',
           cursor:'pointer',transition:'all 0.2s',
           fontSize:11,color,fontWeight:700,textTransform:'uppercase',
+          fontFamily:"'Sarabun', sans-serif",
         }}
-        onMouseEnter={(e)=>{if(hoverBg)e.currentTarget.style.background=hoverBg;if(hoverColor)e.currentTarget.style.color=hoverColor;}}
+        onMouseEnter={(e)=>{e.currentTarget.style.background='var(--accent)';e.currentTarget.style.color='#ffffff';}}
         onMouseLeave={(e)=>{e.currentTarget.style.background=bg;e.currentTarget.style.color=color;}}
         title={s}>{s[0].toUpperCase()}</div>
       ))}
     </div>
   );
 
+  // ═══ CLIENT MODE ═══
   if (!isDesigner) {
     return (
-      <div style={{minHeight:'100vh',background:'#faf9fc',position:'relative'}}>
-        <style>{`
-          .ld-desk{display:none}.ld-mob{display:flex}
-          @media(min-width:768px){.ld-desk{display:flex!important}.ld-mob{display:none!important}}
-        `}</style>
+      <div style={{minHeight:'100vh',background:'var(--bg)',position:'relative'}}>
 
         {/* DESKTOP CLIENT */}
         <div className="ld-desk" style={{
           minHeight:'100vh',flexDirection:'column',alignItems:'center',
           justifyContent:'center',padding:'60px 60px 100px',position:'relative',overflow:'hidden',
         }}>
-          <div style={{position:'absolute',top:80,left:60,width:48,height:48,borderRadius:14,border:'2px solid #e8e3f0',opacity:0.5,transform:'rotate(12deg)'}} />
-          <div style={{position:'absolute',top:140,right:100,width:10,height:10,borderRadius:'50%',background:'#6801C2',opacity:0.18}} />
-          <div style={{position:'absolute',bottom:200,left:120,width:8,height:8,borderRadius:'50%',background:'#00A0C7',opacity:0.2}} />
-          <div style={{position:'absolute',top:200,right:180,width:36,height:36,borderRadius:10,border:'2px solid #efe6fc',opacity:0.4,transform:'rotate(-8deg)'}} />
+          {/* Floating accents */}
+          <div style={{position:'absolute',top:80,left:60,width:48,height:48,borderRadius:14,border:'2px solid var(--border-light)',opacity:0.5,transform:'rotate(12deg)'}} />
+          <div style={{position:'absolute',top:140,right:100,width:10,height:10,borderRadius:'50%',background:'var(--accent)',opacity:0.18}} />
+          <div style={{position:'absolute',bottom:200,left:120,width:8,height:8,borderRadius:'50%',background:'var(--teal)',opacity:0.2}} />
+          <div style={{position:'absolute',top:200,right:180,width:36,height:36,borderRadius:10,border:'2px solid var(--accent-soft)',opacity:0.4,transform:'rotate(-8deg)'}} />
 
           <header style={{position:'absolute',top:0,left:0,right:0,display:'flex',alignItems:'center',justifyContent:'space-between',padding:'28px 48px'}}>
-            <h1 style={{fontFamily:"'Playfair Display', serif",fontSize:22,fontWeight:800,color:'#1a1025',letterSpacing:'0.03em',lineHeight:1}}>I. AM. DESIGN.</h1>
-            <a href="mailto:AshleyPickett46@Gmail.com" style={{fontSize:13,color:'#655a78',textDecoration:'none',padding:'8px 16px',borderRadius:8}}>Contact</a>
+            <h1 style={{fontFamily:"'Playfair Display', serif",fontSize:22,fontWeight:800,color:'var(--text)',letterSpacing:'0.03em',lineHeight:1}}>I. AM. DESIGN.</h1>
+            <a href="mailto:AshleyPickett46@Gmail.com" style={{fontFamily:"'Sarabun', sans-serif",fontSize:13,fontWeight:600,color:'var(--text-helper)',textDecoration:'none',padding:'8px 16px',borderRadius:8}}>Contact</a>
           </header>
 
           <div className="animate-in" style={{textAlign:'center',maxWidth:680,position:'relative',zIndex:1}}>
-            <p style={{fontSize:13,fontWeight:600,letterSpacing:'0.12em',textTransform:'uppercase',color:'#655a78',marginBottom:20}}>
+            <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:13,fontWeight:600,letterSpacing:'0.12em',textTransform:'uppercase',color:'var(--text-helper)',marginBottom:20}}>
               Ashley M. Pickett · UI/UX & Graphic Designer
             </p>
-            <h2 style={{fontFamily:"'Playfair Display', serif",fontSize:56,fontWeight:700,color:'#1a1025',lineHeight:1.12,letterSpacing:'-0.02em',marginBottom:20}}>
-              Let's Build Something<br /><span style={{color:'#6801C2'}}>Beautiful Together</span>
+            <h2 style={{fontFamily:"'Playfair Display', serif",fontSize:56,fontWeight:700,color:'var(--text)',lineHeight:1.12,letterSpacing:'-0.02em',marginBottom:20}}>
+              Let's Build Something<br /><span style={{color:'var(--accent)'}}>Beautiful Together</span>
             </h2>
-            <p style={{fontSize:18,color:'#4a3d5c',lineHeight:1.7,maxWidth:480,margin:'0 auto 40px'}}>
+            <p style={{fontFamily:"'Nunito Sans', sans-serif",fontSize:18,color:'var(--text-secondary)',lineHeight:1.7,maxWidth:480,margin:'0 auto 40px'}}>
               Thanks for choosing me for your project. When you're ready, hit the button below to start the questionnaire.
             </p>
             <button onClick={()=>onSelect('client')} style={{
-              padding:'18px 44px',borderRadius:12,background:'#6801C2',border:'none',
-              color:'#ffffff',fontSize:17,fontWeight:600,cursor:'pointer',
-              transition:'all 0.25s ease',fontFamily:'inherit',
-              boxShadow:'0 4px 20px rgba(104,1,194,0.2)',marginBottom:24,
+              padding:'18px 44px',borderRadius:12,background:'var(--accent)',border:'none',
+              color:'#ffffff',fontSize:16,fontWeight:600,cursor:'pointer',
+              transition:'all 0.25s ease',fontFamily:"'Sarabun', sans-serif",
+              boxShadow:'0 4px 20px rgba(93,44,115,0.2)',marginBottom:24,
             }}
-            onMouseEnter={(e)=>{e.currentTarget.style.background='#5501a0';e.currentTarget.style.transform='translateY(-2px)';e.currentTarget.style.boxShadow='0 8px 28px rgba(104,1,194,0.3)';}}
-            onMouseLeave={(e)=>{e.currentTarget.style.background='#6801C2';e.currentTarget.style.transform='translateY(0)';e.currentTarget.style.boxShadow='0 4px 20px rgba(104,1,194,0.2)';}}
+            onMouseEnter={(e)=>{e.currentTarget.style.background='var(--accent-hover)';e.currentTarget.style.transform='translateY(-2px)';e.currentTarget.style.boxShadow='0 8px 28px rgba(93,44,115,0.3)';}}
+            onMouseLeave={(e)=>{e.currentTarget.style.background='var(--accent)';e.currentTarget.style.transform='translateY(0)';e.currentTarget.style.boxShadow='0 4px 20px rgba(93,44,115,0.2)';}}
             >I'm a Client →</button>
-            <p style={{fontSize:13,color:'#8a7ea0',marginBottom:40}}>This is a No-Obligation Questionnaire</p>
-            <Socials hoverBg="#6801C2" hoverColor="#ffffff" />
-            <p style={{fontSize:12,color:'#8a7ea0',marginTop:12,fontStyle:'italic'}}>If you'd like to follow me — it's majorly appreciated!</p>
+            <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:13,color:'var(--text-helper)',marginBottom:40}}>This is a No-Obligation Questionnaire</p>
+            <Socials />
+            <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:12,color:'var(--text-secondary)',marginTop:12,fontStyle:'italic'}}>If you'd like to follow me — it's majorly appreciated!</p>
           </div>
         </div>
 
         {/* MOBILE CLIENT */}
         <div className="ld-mob" style={{minHeight:'100vh',flexDirection:'column',padding:'0 0 100px'}}>
           <header style={{padding:'24px 20px 0',textAlign:'center'}}>
-            <h1 style={{fontFamily:"'Playfair Display', serif",fontSize:34,fontWeight:800,letterSpacing:'0.04em',color:'#1a1025',lineHeight:1,marginBottom:8}}>I. AM. DESIGN.</h1>
-            <p style={{fontSize:12,color:'#655a78',lineHeight:1.5}}>Ashley M. Pickett · UI/UX & Graphic Designer</p>
+            <h1 style={{fontFamily:"'Playfair Display', serif",fontSize:34,fontWeight:800,letterSpacing:'0.04em',color:'var(--text)',lineHeight:1,marginBottom:8}}>I. AM. DESIGN.</h1>
+            <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:12,color:'var(--text-helper)',lineHeight:1.5}}>Ashley M. Pickett · UI/UX & Graphic Designer</p>
             <div style={{display:'flex',justifyContent:'center',gap:16,marginTop:4}}>
-              <a href="mailto:AshleyPickett46@Gmail.com" style={{fontSize:11,color:'#6801C2',textDecoration:'underline',textUnderlineOffset:2}}>AshleyPickett46@Gmail.com</a>
-              <span style={{fontSize:11,color:'#655a78'}}>(509) 609-6956</span>
+              <a href="mailto:AshleyPickett46@Gmail.com" style={{fontSize:11,color:'var(--link)',textDecoration:'underline',textUnderlineOffset:2}}>AshleyPickett46@Gmail.com</a>
+              <span style={{fontFamily:"'Sarabun', sans-serif",fontSize:11,color:'var(--text-helper)'}}>(509) 609-6956</span>
             </div>
           </header>
-          <div style={{margin:'20px 20px 0',borderRadius:14,overflow:'hidden',background:'#e8e3f0',aspectRatio:'16 / 9',maxHeight:200}} />
+          <div style={{margin:'20px 20px 0',borderRadius:14,overflow:'hidden',background:'var(--border-light)',aspectRatio:'16 / 9',maxHeight:200}} />
           <div className="animate-in" style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',padding:'28px 24px 0',textAlign:'center'}}>
-            <h2 style={{fontFamily:"'Playfair Display', serif",fontSize:30,fontWeight:600,color:'#1a1025',marginBottom:10}}>Welcome</h2>
-            <p style={{fontSize:15,color:'#4a3d5c',maxWidth:340,lineHeight:1.65,marginBottom:24}}>
+            <h2 style={{fontFamily:"'Playfair Display', serif",fontSize:30,fontWeight:600,color:'var(--text)',marginBottom:10}}>Welcome</h2>
+            <p style={{fontSize:15,color:'var(--text-secondary)',maxWidth:340,lineHeight:1.65,marginBottom:24}}>
               Thanks for choosing me for your project! When you're ready, hit the button below to start the questionnaire.
             </p>
-            <span style={{display:'block',fontSize:26,color:'#d8d0e4',marginBottom:20,lineHeight:1}} aria-hidden="true">↓</span>
+            <span style={{display:'block',fontSize:26,color:'var(--border)',marginBottom:20,lineHeight:1}} aria-hidden="true">↓</span>
             <button onClick={()=>onSelect('client')} style={{
-              padding:'20px 40px',borderRadius:14,background:'#6801C2',border:'none',
-              color:'#ffffff',fontSize:20,fontWeight:700,cursor:'pointer',
-              transition:'all 0.25s ease',fontFamily:'inherit',textTransform:'uppercase',
-              width:'100%',maxWidth:340,boxShadow:'0 4px 24px rgba(104,1,194,0.2)',
+              padding:'20px 40px',borderRadius:14,background:'var(--accent)',border:'none',
+              color:'#ffffff',fontSize:18,fontWeight:700,cursor:'pointer',
+              transition:'all 0.25s ease',fontFamily:"'Sarabun', sans-serif",
+              textTransform:'uppercase',width:'100%',maxWidth:340,
+              boxShadow:'0 4px 24px rgba(93,44,115,0.2)',
             }}
-            onMouseEnter={(e)=>{e.currentTarget.style.background='#5501a0';}}
-            onMouseLeave={(e)=>{e.currentTarget.style.background='#6801C2';}}
+            onMouseEnter={(e)=>{e.currentTarget.style.background='var(--accent-hover)';}}
+            onMouseLeave={(e)=>{e.currentTarget.style.background='var(--accent)';}}
             >I'm a Client</button>
-            <p style={{fontSize:11,color:'#655a78',marginTop:12}}>This is a No-Obligation Questionnaire</p>
-            <div style={{marginTop:24}}><Socials size={38} bg="#e8e3f0" color="#655a78" /></div>
-            <p style={{fontSize:11,color:'#8a7ea0',marginTop:10,fontStyle:'italic'}}>If you'd like to follow me — it's majorly appreciated!</p>
+            <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:11,color:'var(--text-helper)',marginTop:12}}>This is a No-Obligation Questionnaire</p>
+            <div style={{marginTop:24}}><Socials size={38} /></div>
+            <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:11,color:'var(--text-secondary)',marginTop:10,fontStyle:'italic'}}>If you'd like to follow me — it's majorly appreciated!</p>
           </div>
         </div>
         <Toggle />
@@ -138,46 +134,43 @@ function Landing({ onSelect }) {
     );
   }
 
-  // DESIGNER MODE
+  // ═══ DESIGNER MODE ═══
   return (
-    <div data-theme="dark" style={{minHeight:'100vh',background:'#0d0a12',position:'relative'}}>
-      <style>{`
-        .ld-desk{display:none}.ld-mob{display:flex}
-        @media(min-width:768px){.ld-desk{display:flex!important}.ld-mob{display:none!important}}
-      `}</style>
+    <div data-theme="dark" style={{minHeight:'100vh',background:'var(--bg)',position:'relative'}}>
 
       {/* DESKTOP DESIGNER */}
       <div className="ld-desk" style={{
         minHeight:'100vh',flexDirection:'column',alignItems:'center',justifyContent:'center',
         padding:'60px 60px 100px',position:'relative',overflow:'hidden',
       }}>
-        <div style={{position:'absolute',top:'30%',left:'50%',transform:'translate(-50%,-50%)',width:500,height:500,borderRadius:'50%',background:'radial-gradient(circle,rgba(127,99,193,0.06) 0%,transparent 70%)',pointerEvents:'none'}} />
+        <div style={{position:'absolute',top:'30%',left:'50%',transform:'translate(-50%,-50%)',width:500,height:500,borderRadius:'50%',background:'radial-gradient(circle,rgba(145,99,191,0.06) 0%,transparent 70%)',pointerEvents:'none'}} />
         <header style={{position:'absolute',top:0,left:0,right:0,display:'flex',alignItems:'center',justifyContent:'space-between',padding:'28px 48px'}}>
-          <h1 style={{fontFamily:"'Playfair Display', serif",fontSize:22,fontWeight:800,color:'#f0ecf5',letterSpacing:'0.03em',lineHeight:1}}>I. AM. DESIGN.</h1>
-          <p style={{fontSize:10,fontWeight:700,letterSpacing:'0.2em',textTransform:'uppercase',color:'#ff4d4d',fontFamily:"'Space Mono', monospace"}}>Internal Use Only</p>
+          <h1 style={{fontFamily:"'Playfair Display', serif",fontSize:22,fontWeight:800,color:'var(--text)',letterSpacing:'0.03em',lineHeight:1}}>I. AM. DESIGN.</h1>
+          <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:10,fontWeight:700,letterSpacing:'0.2em',textTransform:'uppercase',color:'#E74C3C'}}>Internal Use Only</p>
         </header>
         <div className="animate-in" style={{textAlign:'center',maxWidth:520,position:'relative',zIndex:1}}>
-          <h2 style={{fontFamily:"'Playfair Display', serif",fontSize:48,fontWeight:700,color:'#f0ecf5',lineHeight:1.15,marginBottom:16}}>Project Metadata</h2>
-          <p style={{fontSize:17,color:'#8a7ea0',lineHeight:1.65,maxWidth:400,margin:'0 auto 44px'}}>
+          <h2 style={{fontFamily:"'Playfair Display', serif",fontSize:48,fontWeight:700,color:'var(--text)',lineHeight:1.15,marginBottom:16}}>Project Metadata</h2>
+          <p style={{fontSize:17,color:'var(--text-secondary)',lineHeight:1.65,maxWidth:400,margin:'0 auto 44px'}}>
             Your private process log, client notes, and honest reflections.
           </p>
           <div style={{display:'flex',gap:16,justifyContent:'center',flexWrap:'wrap'}}>
             <button onClick={()=>onSelect('designer-fill')} style={{
-              padding:'18px 40px',borderRadius:12,background:'#7F63C1',border:'none',
-              color:'#ffffff',fontSize:17,fontWeight:600,cursor:'pointer',fontFamily:'inherit',
-              transition:'all 0.25s ease',boxShadow:'0 4px 20px rgba(127,99,193,0.25)',
+              padding:'18px 40px',borderRadius:12,background:'var(--accent)',border:'none',
+              color:'#ffffff',fontSize:16,fontWeight:600,cursor:'pointer',
+              fontFamily:"'Sarabun', sans-serif",transition:'all 0.25s ease',
+              boxShadow:'0 4px 20px rgba(145,99,191,0.25)',
             }}
-            onMouseEnter={(e)=>{e.currentTarget.style.background='#9a80d8';e.currentTarget.style.transform='translateY(-2px)';}}
-            onMouseLeave={(e)=>{e.currentTarget.style.background='#7F63C1';e.currentTarget.style.transform='translateY(0)';}}
+            onMouseEnter={(e)=>{e.currentTarget.style.background='var(--accent-hover)';e.currentTarget.style.transform='translateY(-2px)';}}
+            onMouseLeave={(e)=>{e.currentTarget.style.background='var(--accent)';e.currentTarget.style.transform='translateY(0)';}}
             >Fill in Online →</button>
             <a href="/creative-brief-complete.pdf" download style={{
               padding:'18px 40px',borderRadius:12,background:'transparent',
-              border:'2px solid #2e2640',color:'#bab0ca',fontSize:17,fontWeight:600,
-              cursor:'pointer',fontFamily:'inherit',textDecoration:'none',textAlign:'center',
+              border:'2px solid var(--border)',color:'var(--text-secondary)',fontSize:16,fontWeight:600,
+              cursor:'pointer',fontFamily:"'Sarabun', sans-serif",textDecoration:'none',textAlign:'center',
               transition:'border-color 0.25s',
             }}
-            onMouseEnter={(e)=>e.currentTarget.style.borderColor='#7F63C1'}
-            onMouseLeave={(e)=>e.currentTarget.style.borderColor='#2e2640'}
+            onMouseEnter={(e)=>e.currentTarget.style.borderColor='var(--accent)'}
+            onMouseLeave={(e)=>e.currentTarget.style.borderColor='var(--border)'}
             >Download PDF</a>
           </div>
         </div>
@@ -186,24 +179,24 @@ function Landing({ onSelect }) {
       {/* MOBILE DESIGNER */}
       <div className="ld-mob" style={{minHeight:'100vh',flexDirection:'column',padding:'0 0 100px'}}>
         <header style={{padding:'24px 20px 0',textAlign:'center'}}>
-          <h1 style={{fontFamily:"'Playfair Display', serif",fontSize:34,fontWeight:800,letterSpacing:'0.04em',color:'#f0ecf5',lineHeight:1,marginBottom:8}}>I. AM. DESIGN.</h1>
-          <p style={{fontSize:10,fontWeight:700,letterSpacing:'0.2em',textTransform:'uppercase',color:'#ff4d4d',fontFamily:"'Space Mono', monospace"}}>Internal Use Only</p>
+          <h1 style={{fontFamily:"'Playfair Display', serif",fontSize:34,fontWeight:800,letterSpacing:'0.04em',color:'var(--text)',lineHeight:1,marginBottom:8}}>I. AM. DESIGN.</h1>
+          <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:10,fontWeight:700,letterSpacing:'0.2em',textTransform:'uppercase',color:'#E74C3C'}}>Internal Use Only</p>
         </header>
-        <div style={{margin:'20px 20px 0',borderRadius:14,overflow:'hidden',background:'#18141f',aspectRatio:'16 / 9',maxHeight:200}} />
+        <div style={{margin:'20px 20px 0',borderRadius:14,overflow:'hidden',background:'var(--card)',aspectRatio:'16 / 9',maxHeight:200}} />
         <div className="animate-in" style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',padding:'28px 24px 0',textAlign:'center'}}>
-          <h2 style={{fontFamily:"'Playfair Display', serif",fontSize:28,fontWeight:600,color:'#f0ecf5',marginBottom:10}}>Project Metadata</h2>
-          <p style={{fontSize:14,color:'#8a7ea0',marginBottom:28,lineHeight:1.6,maxWidth:320}}>
+          <h2 style={{fontFamily:"'Playfair Display', serif",fontSize:28,fontWeight:600,color:'var(--text)',marginBottom:10}}>Project Metadata</h2>
+          <p style={{fontSize:14,color:'var(--text-secondary)',marginBottom:28,lineHeight:1.6,maxWidth:320}}>
             Your private process log, client notes, and honest reflections.
           </p>
           <div style={{display:'flex',flexDirection:'column',gap:12,width:'100%',maxWidth:320}}>
             <button onClick={()=>onSelect('designer-fill')} style={{
-              padding:'18px 24px',borderRadius:12,background:'#7F63C1',border:'none',
-              color:'#ffffff',fontSize:16,fontWeight:600,cursor:'pointer',fontFamily:'inherit',
+              padding:'18px 24px',borderRadius:12,background:'var(--accent)',border:'none',
+              color:'#ffffff',fontSize:16,fontWeight:600,cursor:'pointer',fontFamily:"'Sarabun', sans-serif",
             }}>Fill in Online</button>
             <a href="/creative-brief-complete.pdf" download style={{
               padding:'18px 24px',borderRadius:12,background:'transparent',
-              border:'2px solid #2e2640',color:'#bab0ca',fontSize:15,fontWeight:600,
-              textDecoration:'none',textAlign:'center',
+              border:'2px solid var(--border)',color:'var(--text-secondary)',fontSize:15,fontWeight:600,
+              textDecoration:'none',textAlign:'center',fontFamily:"'Sarabun', sans-serif",
             }}>Download PDF</a>
           </div>
         </div>
@@ -248,15 +241,15 @@ function ClientPicker({ onPick }) {
               padding: '24px 28px', borderRadius: 14,
               background: 'var(--card)', border: '2px solid var(--border)',
               cursor: 'pointer', transition: 'all 0.2s',
-              fontFamily: 'inherit', textAlign: 'left',
+              fontFamily: "'Sarabun', sans-serif", textAlign: 'left',
             }}
-            onMouseEnter={(e) => e.currentTarget.style.borderColor = '#6801C2'}
+            onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--accent)'}
             onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--border)'}
           >
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}>
               <span style={{
                 display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-                width: 36, height: 36, borderRadius: 10, background: '#6801C2',
+                width: 36, height: 36, borderRadius: 10, background: 'var(--accent)',
                 color: '#fff', fontWeight: 700, fontSize: 16, flexShrink: 0,
               }}>A</span>
               <div>
@@ -277,15 +270,15 @@ function ClientPicker({ onPick }) {
               padding: '24px 28px', borderRadius: 14,
               background: 'var(--card)', border: '2px solid var(--border)',
               cursor: 'pointer', transition: 'all 0.2s',
-              fontFamily: 'inherit', textAlign: 'left',
+              fontFamily: "'Sarabun', sans-serif", textAlign: 'left',
             }}
-            onMouseEnter={(e) => e.currentTarget.style.borderColor = '#00A0C7'}
+            onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--accent-secondary)'}
             onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--border)'}
           >
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}>
               <span style={{
                 display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-                width: 36, height: 36, borderRadius: 10, background: '#00A0C7',
+                width: 36, height: 36, borderRadius: 10, background: 'var(--accent-secondary)',
                 color: '#fff', fontWeight: 700, fontSize: 16, flexShrink: 0,
               }}>B</span>
               <div>
@@ -306,7 +299,7 @@ function ClientPicker({ onPick }) {
           style={{
             marginTop: 32, background: 'none', border: 'none',
             color: 'var(--text-helper)', fontSize: 14, cursor: 'pointer',
-            fontFamily: 'inherit', textDecoration: 'underline',
+            fontFamily: "'Sarabun', sans-serif", textDecoration: 'underline',
             textUnderlineOffset: 3,
           }}
         >
@@ -347,10 +340,10 @@ function DeepDivePrompt({ onChoice }) {
               padding: '16px 24px', borderRadius: 12,
               background: 'var(--card)', border: '2px solid var(--border)',
               color: 'var(--text)', fontSize: 15, fontWeight: 600,
-              cursor: 'pointer', fontFamily: 'inherit', textAlign: 'left',
+              cursor: 'pointer', fontFamily: "'Sarabun', sans-serif", textAlign: 'left',
               transition: 'border-color 0.2s',
             }}
-            onMouseEnter={(e) => e.currentTarget.style.borderColor = '#00A0C7'}
+            onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--accent-secondary)'}
             onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--border)'}
           >
             Deep dive first — I want to be thorough
@@ -359,13 +352,13 @@ function DeepDivePrompt({ onChoice }) {
             onClick={() => onChoice('brief-first')}
             style={{
               padding: '16px 24px', borderRadius: 12,
-              background: '#6801C2', border: 'none',
+              background: 'var(--accent)', border: 'none',
               color: '#ffffff', fontSize: 15, fontWeight: 600,
-              cursor: 'pointer', fontFamily: 'inherit', textAlign: 'left',
+              cursor: 'pointer', fontFamily: "'Sarabun', sans-serif", textAlign: 'left',
               transition: 'background 0.2s',
             }}
-            onMouseEnter={(e) => e.currentTarget.style.background = '#5501a0'}
-            onMouseLeave={(e) => e.currentTarget.style.background = '#6801C2'}
+            onMouseEnter={(e) => e.currentTarget.style.background = 'var(--accent-hover)'}
+            onMouseLeave={(e) => e.currentTarget.style.background = 'var(--accent)'}
           >
             Start with my brief — we'll get to the details after →
           </button>
@@ -441,21 +434,21 @@ function BriefForm({ sections, version, accentColor, isDark, onSubmit, onBack, i
   return (
     <div {...themeProps} style={{
       minHeight: '100vh', display: 'flex', flexDirection: 'column',
-      background: isDark ? '#0d0a12' : 'var(--bg)',
-      color: isDark ? '#f0ecf5' : 'var(--text)',
+      background: 'var(--bg)',
+      color: 'var(--text)',
     }}>
       <a href="#main-form" className="skip-link">Skip to form</a>
 
       <header style={{
-        background: isDark ? '#110e17' : accentColor,
+        background: isDark ? 'var(--bg-elevated)' : accentColor,
         padding: '24px 24px 20px',
-        borderBottom: isDark ? '1px solid #2e2640' : 'none',
+        borderBottom: isDark ? '1px solid var(--border)' : 'none',
       }}>
         <div style={{ maxWidth: 680, margin: '0 auto' }}>
           <p style={{
             fontSize: 11, fontWeight: 600, letterSpacing: '0.12em',
             textTransform: 'uppercase', marginBottom: 6,
-            color: isDark ? '#ff4d4d' : 'rgba(255,255,255,0.7)',
+            color: isDark ? '#E74C3C' : 'rgba(255,255,255,0.7)',
             fontFamily: isDark ? "'Space Mono', monospace" : 'inherit',
           }}>
             {isDark ? 'Private — Do Not Share' : `Version ${version.toUpperCase()}`}
@@ -469,7 +462,7 @@ function BriefForm({ sections, version, accentColor, isDark, onSubmit, onBack, i
           <ProgressBar
             current={filledCount}
             total={totalFields}
-            color={isDark ? '#7F63C1' : 'rgba(255,255,255,0.9)'}
+            color={isDark ? 'var(--purple-soft)' : 'rgba(255,255,255,0.9)'}
           />
         </div>
       </header>
@@ -477,7 +470,7 @@ function BriefForm({ sections, version, accentColor, isDark, onSubmit, onBack, i
       {step === 0 && introText && (
         <div style={{ maxWidth: 680, margin: '0 auto', padding: '20px 24px 0' }}>
           <p className="animate-in" style={{
-            fontSize: 15, color: isDark ? '#8a7ea0' : 'var(--text-secondary)',
+            fontSize: 15, color: 'var(--text-secondary)',
             lineHeight: 1.7, fontStyle: 'italic',
           }}>
             {introText}
@@ -497,9 +490,9 @@ function BriefForm({ sections, version, accentColor, isDark, onSubmit, onBack, i
             versionColor={accentColor}
           />
           <div className="animate-delay" style={{
-            background: isDark ? '#18141f' : 'var(--card)',
+            background: 'var(--card)',
             borderRadius: 16, padding: '28px 24px',
-            border: `1px solid ${isDark ? '#2e2640' : 'var(--border-light)'}`,
+            border: `1px solid ${isDark ? 'var(--border)' : 'var(--border-light)'}`,
           }}>
             {section.fields.map((field) => (
               <FormField
@@ -515,8 +508,8 @@ function BriefForm({ sections, version, accentColor, isDark, onSubmit, onBack, i
 
       <footer style={{
         position: 'fixed', bottom: 0, left: 0, right: 0,
-        background: isDark ? '#110e17' : 'var(--card)',
-        borderTop: `1px solid ${isDark ? '#2e2640' : 'var(--border-light)'}`,
+        background: isDark ? 'var(--bg-elevated)' : 'var(--card)',
+        borderTop: `1px solid ${isDark ? 'var(--border)' : 'var(--border-light)'}`,
         padding: '14px 20px', zIndex: 10,
       }}>
         <div style={{
@@ -527,11 +520,11 @@ function BriefForm({ sections, version, accentColor, isDark, onSubmit, onBack, i
             onClick={() => step > 0 ? setStep(step - 1) : onBack()}
             style={{
               padding: '10px 20px', borderRadius: 10,
-              border: `2px solid ${isDark ? '#2e2640' : 'var(--border)'}`,
+              border: `2px solid var(--border)`,
               background: 'transparent',
-              color: isDark ? '#bab0ca' : 'var(--text-secondary)',
+              color: 'var(--text-secondary)',
               fontSize: 14, fontWeight: 600, cursor: 'pointer',
-              fontFamily: 'inherit', transition: 'border-color 0.2s',
+              fontFamily: "'Sarabun', sans-serif", transition: 'border-color 0.2s',
             }}
           >
             ← {step > 0 ? 'Back' : 'Exit'}
@@ -552,8 +545,8 @@ function BriefForm({ sections, version, accentColor, isDark, onSubmit, onBack, i
                   background: i === step
                     ? accentColor
                     : i < step
-                      ? (isDark ? '#5a5a60' : 'var(--text-helper)')
-                      : (isDark ? '#2e2640' : 'var(--border)'),
+                      ? 'var(--text-helper)'
+                      : 'var(--border)',
                 }}
               />
             ))}
@@ -566,7 +559,7 @@ function BriefForm({ sections, version, accentColor, isDark, onSubmit, onBack, i
                 padding: '10px 24px', borderRadius: 10, border: 'none',
                 background: accentColor, color: '#ffffff',
                 fontSize: 14, fontWeight: 600, cursor: 'pointer',
-                fontFamily: 'inherit', transition: 'background 0.2s',
+                fontFamily: "'Sarabun', sans-serif", transition: 'background 0.2s',
               }}
             >
               Next →
@@ -576,10 +569,10 @@ function BriefForm({ sections, version, accentColor, isDark, onSubmit, onBack, i
               onClick={handleSubmit}
               style={{
                 padding: '10px 24px', borderRadius: 10, border: 'none',
-                background: isDark ? '#00DBBE' : accentColor,
-                color: isDark ? '#0d0a12' : '#ffffff',
+                background: isDark ? 'var(--success)' : accentColor,
+                color: isDark ? 'var(--bg)' : '#ffffff',
                 fontSize: 14, fontWeight: 600, cursor: 'pointer',
-                fontFamily: 'inherit',
+                fontFamily: "'Sarabun', sans-serif",
               }}
             >
               {signoff ? 'Submit Brief ✓' : 'Save & Continue →'}
@@ -597,7 +590,7 @@ function Success({ version, onReset }) {
   return (
     <div style={{
       minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center',
-      padding: '40px 20px', background: isDark ? '#0d0a12' : '#6801C2',
+      padding: '40px 20px', background: isDark ? 'var(--bg)' : 'var(--accent)',
     }}>
       <div className="animate-in" style={{ textAlign: 'center', maxWidth: 480 }}>
         <div style={{ fontSize: 56, marginBottom: 20 }}>
@@ -610,7 +603,7 @@ function Success({ version, onReset }) {
           {isDark ? 'Saved' : 'Brief Submitted'}
         </h1>
         <p style={{
-          color: isDark ? '#8a7ea0' : 'rgba(255,255,255,0.8)',
+          color: isDark ? 'var(--text-secondary)' : 'rgba(255,255,255,0.8)',
           fontSize: 16, lineHeight: 1.6, marginBottom: 32,
         }}>
           {isDark
@@ -632,7 +625,7 @@ function Success({ version, onReset }) {
             border: '2px solid rgba(255,255,255,0.2)',
             background: 'transparent', color: '#ffffff',
             fontSize: 15, fontWeight: 600, cursor: 'pointer',
-            fontFamily: 'inherit',
+            fontFamily: "'Sarabun', sans-serif",
           }}
         >
           ← Start Over
@@ -693,7 +686,7 @@ export default function Home() {
         key="private"
         sections={PRIVATE_META}
         version="private"
-        accentColor="#7F63C1"
+        accentColor="var(--purple-soft)"
         isDark={true}
         introText="Be honest, be messy, this is yours. Not for client eyes."
         signoff={true}
@@ -724,7 +717,7 @@ export default function Home() {
           key="deepdive-before"
           sections={VERSION_C}
           version="c"
-          accentColor="#00A0C7"
+          accentColor="var(--accent-secondary)"
           isDark={false}
           introText="Let's get the details nailed down first. Take your time."
           signoff={false}
@@ -740,10 +733,10 @@ export default function Home() {
 
     if (phase === 'brief') {
       const sections = clientVersion === 'a' ? VERSION_A : VERSION_B;
-      const color = clientVersion === 'a' ? '#6801C2' : '#00A0C7';
+      const color = clientVersion === 'a' ? 'var(--accent)' : 'var(--accent-secondary)';
       const intro = clientVersion === 'a'
         ? "Hi! I'm so excited to work with you. Fill this out as best you can — the more detail, the better. No wrong answers."
-        : "This is a safe space — just answer what can. Write whatever comes to mind — even 'I don't know' is a great answer. I'll help us figure out the rest.";
+        : "This is a safe space — just answer what you can. Write whatever comes to mind — even 'I don't know' is a great answer. I'll help us figure out the rest.";
 
       return (
         <BriefForm
@@ -784,7 +777,7 @@ export default function Home() {
           key="deepdive-after"
           sections={VERSION_C}
           version="c"
-          accentColor="#00A0C7"
+          accentColor="var(--accent-secondary)"
           isDark={false}
           introText="Almost done! This detailed guide helps me build exactly what you need."
           signoff={true}
