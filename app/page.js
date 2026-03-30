@@ -105,18 +105,17 @@ function Landing({ onSelect }) {
             justifyContent:'center',padding:'4rem 2rem 3rem',textAlign:'center',
             maxWidth:1400,margin:'0 auto',width:'100%',position:'relative',
           }}>
-            <p className="section-label animate-in-1" style={{marginBottom:'1rem'}}>
-              UI/UX & Graphic Designer
-            </p>
-            <h1 className="animate-in-2" style={{
+            <h1 className="animate-in-1" style={{
               fontFamily:"'Playfair Display',serif",
               fontSize:'clamp(2.8rem, 6vw, 5rem)',fontWeight:700,
               lineHeight:1.05,letterSpacing:'-0.03em',
-              color:'var(--text)',marginBottom:'1.25rem',
+              color:'var(--text)',marginBottom:'0.75rem',
             }}>
-              I. AM.<br />
-              <span style={{color:'var(--accent)',fontStyle:'italic'}}>DESIGN</span>.
+              I. AM. <span style={{color:'var(--accent)',fontStyle:'italic'}}>DESIGN</span>.
             </h1>
+            <p className="section-label animate-in-2" style={{marginBottom:'1.5rem'}}>
+              Ashley Marie Pickett · UI/UX & Graphic Designer
+            </p>
             <p className="animate-in-3" style={{
               fontSize:'clamp(1rem, 1.8vw, 1.25rem)',color:'var(--text-secondary)',
               maxWidth:580,lineHeight:1.7,marginBottom:'2rem',textWrap:'balance',
@@ -128,9 +127,8 @@ function Landing({ onSelect }) {
               <button onClick={()=>onSelect('client')} className="btn-pill btn-pill--primary">
                 I'm a Client →
               </button>
-              <Toggle />
             </div>
-            <p className="animate-in-5" style={{
+            <p className="animate-in-4" style={{
               fontFamily:"'Sarabun',sans-serif",fontSize:'0.85rem',
               color:'var(--text-helper)',letterSpacing:'0.04em',marginBottom:'3rem',
             }}>This is a No-Obligation Questionnaire</p>
@@ -144,6 +142,11 @@ function Landing({ onSelect }) {
               <img src="/hero-image.png" alt="Portfolio preview" style={{
                 width:'100%',height:'auto',display:'block',
               }} />
+            </div>
+
+            {/* Toggle under image */}
+            <div className="animate-in-5" style={{marginTop:'2rem'}}>
+              <Toggle />
             </div>
           </div>
         </div>
@@ -179,18 +182,17 @@ function Landing({ onSelect }) {
             flex:1,display:'flex',flexDirection:'column',alignItems:'center',
             padding:'1.75rem 1.5rem 0',textAlign:'center',width:'100%',
           }}>
-            <p className="section-label animate-in-1" style={{marginBottom:'0.75rem',fontSize:'0.7rem'}}>
-              UI/UX & Graphic Designer
-            </p>
-            <h1 className="animate-in-2" style={{
+            <h1 className="animate-in-1" style={{
               fontFamily:"'Playfair Display',serif",
               fontSize:'clamp(2.2rem, 9vw, 3rem)',fontWeight:700,
               lineHeight:1.05,letterSpacing:'-0.03em',
-              color:'var(--text)',marginBottom:'0.75rem',
+              color:'var(--text)',marginBottom:'0.5rem',
             }}>
-              I. AM.<br />
-              <span style={{color:'var(--accent)',fontStyle:'italic'}}>DESIGN</span>.
+              I. AM. <span style={{color:'var(--accent)',fontStyle:'italic'}}>DESIGN</span>.
             </h1>
+            <p className="section-label animate-in-2" style={{marginBottom:'1rem',fontSize:'0.7rem'}}>
+              Ashley Marie Pickett · UI/UX & Graphic Designer
+            </p>
             <p className="animate-in-3" style={{
               fontSize:'1rem',color:'var(--text-secondary)',
               maxWidth:340,lineHeight:1.65,marginBottom:'1.5rem',textWrap:'balance',
