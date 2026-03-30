@@ -128,16 +128,21 @@ function Landing({ onSelect }) {
         </div>
 
         {/* MOBILE CLIENT */}
-        <div className="ld-mob" style={{minHeight:'100vh',flexDirection:'column',padding:0}}>
+        <div className="ld-mob" style={{minHeight:'100vh',flexDirection:'column',padding:0,alignItems:'center'}}>
           <header style={{padding:'24px 20px 0',textAlign:'center',width:'100%'}}>
-            <h1 style={{fontFamily:"'Playfair Display', serif",fontSize:34,fontWeight:800,letterSpacing:'0.04em',color:'var(--text)',lineHeight:1,marginBottom:8}}>I. AM. DESIGN.</h1>
-            <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:12,color:'var(--text-helper)',lineHeight:1.5}}>Ashley M. Pickett · UI/UX & Graphic Designer</p>
-            <div style={{display:'flex',justifyContent:'center',gap:16,marginTop:4}}>
-              <a href="mailto:AshleyPickett46@Gmail.com" style={{fontSize:11,color:'var(--link)',textDecoration:'underline',textUnderlineOffset:2}}>AshleyPickett46@Gmail.com</a>
-              <span style={{fontFamily:"'Sarabun', sans-serif",fontSize:11,color:'var(--text-helper)'}}>(509) 609-6956</span>
-            </div>
+            <h1 style={{fontFamily:"'Playfair Display', serif",fontSize:34,fontWeight:800,letterSpacing:'0.04em',color:'var(--text)',lineHeight:1,marginBottom:6}}>I. AM. DESIGN.</h1>
+            <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:12,color:'var(--text-helper)',lineHeight:1.5,marginBottom:14}}>Ashley M. Pickett · UI/UX & Graphic Designer</p>
+            <a href="mailto:AshleyPickett46@Gmail.com" style={{
+              display:'inline-block',fontFamily:"'Sarabun', sans-serif",fontSize:12,fontWeight:600,
+              color:'var(--text-on-accent)',textDecoration:'none',
+              padding:'10px 22px',borderRadius:100,background:'var(--accent)',
+              transition:'background 0.2s ease',
+            }}
+            onMouseEnter={(e)=>e.currentTarget.style.background='var(--accent-hover)'}
+            onMouseLeave={(e)=>e.currentTarget.style.background='var(--accent)'}
+            >Contact</a>
           </header>
-          <div style={{margin:'20px 20px 0',borderRadius:14,overflow:'hidden',background:'var(--border-light)',aspectRatio:'16 / 9',maxHeight:200}} />
+          <div style={{margin:'20px auto 0',width:'calc(100% - 40px)',maxWidth:400,borderRadius:14,overflow:'hidden',background:'var(--border-light)',aspectRatio:'16 / 9'}} />
           <div className="animate-in" style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',padding:'28px 24px 0',textAlign:'center',width:'100%'}}>
             <h2 style={{fontFamily:"'Playfair Display', serif",fontSize:30,fontWeight:600,color:'var(--text)',marginBottom:10}}>Welcome</h2>
             <p style={{fontSize:15,color:'var(--text-secondary)',maxWidth:340,lineHeight:1.65,marginBottom:24}}>
@@ -232,12 +237,21 @@ function Landing({ onSelect }) {
       </div>
 
       {/* MOBILE DESIGNER */}
-      <div className="ld-mob" style={{minHeight:'100vh',flexDirection:'column',padding:0}}>
+      <div className="ld-mob" style={{minHeight:'100vh',flexDirection:'column',padding:0,alignItems:'center'}}>
         <header style={{padding:'24px 20px 0',textAlign:'center',width:'100%'}}>
-          <h1 style={{fontFamily:"'Playfair Display', serif",fontSize:34,fontWeight:800,letterSpacing:'0.04em',color:'var(--text)',lineHeight:1,marginBottom:8}}>I. AM. DESIGN.</h1>
-          <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:10,fontWeight:700,letterSpacing:'0.2em',textTransform:'uppercase',color:'#E74C3C'}}>Internal Use Only</p>
+          <h1 style={{fontFamily:"'Playfair Display', serif",fontSize:34,fontWeight:800,letterSpacing:'0.04em',color:'var(--text)',lineHeight:1,marginBottom:6}}>I. AM. DESIGN.</h1>
+          <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:10,fontWeight:700,letterSpacing:'0.2em',textTransform:'uppercase',color:'#E74C3C',marginBottom:14}}>Internal Use Only</p>
+          <a href="mailto:AshleyPickett46@Gmail.com" style={{
+            display:'inline-block',fontFamily:"'Sarabun', sans-serif",fontSize:12,fontWeight:600,
+            color:'var(--text-on-accent)',textDecoration:'none',
+            padding:'10px 22px',borderRadius:100,background:'var(--accent)',
+            transition:'background 0.2s ease',
+          }}
+          onMouseEnter={(e)=>e.currentTarget.style.background='var(--accent-hover)'}
+          onMouseLeave={(e)=>e.currentTarget.style.background='var(--accent)'}
+          >Contact</a>
         </header>
-        <div style={{margin:'20px 20px 0',borderRadius:14,overflow:'hidden',background:'var(--card)',aspectRatio:'16 / 9',maxHeight:200}} />
+        <div style={{margin:'20px auto 0',width:'calc(100% - 40px)',maxWidth:400,borderRadius:14,overflow:'hidden',background:'var(--card)',aspectRatio:'16 / 9'}} />
         <div className="animate-in" style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',padding:'28px 24px 0',textAlign:'center',width:'100%'}}>
           <h2 style={{fontFamily:"'Playfair Display', serif",fontSize:28,fontWeight:600,color:'var(--text)',marginBottom:10}}>Project Metadata</h2>
           <p style={{fontSize:14,color:'var(--text-secondary)',marginBottom:28,lineHeight:1.6,maxWidth:320}}>
