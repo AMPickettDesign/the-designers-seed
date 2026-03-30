@@ -6,246 +6,209 @@ import { FormField, SectionHeader, ProgressBar } from '../components/FormFields'
 
 // ─── LANDING SCREEN ─────────────────────────────────────────
 function Landing({ onSelect }) {
-  const [mode, setMode] = useState('client'); // 'client' | 'designer'
+  const [mode, setMode] = useState('client');
   const isDesigner = mode === 'designer';
 
-  return (
-    <div
-      data-theme={isDesigner ? 'dark' : undefined}
-      style={{
-        minHeight: '100vh', display: 'flex', flexDirection: 'column',
-        background: isDesigner ? '#0d0a12' : '#faf9fc',
-        transition: 'background 0.4s ease',
-      }}
-    >
-      {/* ── Top branding bar ── */}
-      <header style={{
-        padding: '28px 24px 0', textAlign: 'center',
-      }}>
-        <h1 style={{
-          fontFamily: "'Playfair Display', serif",
-          fontSize: 38, fontWeight: 800, letterSpacing: '0.04em',
-          color: isDesigner ? '#f0ecf5' : '#1a1025',
-          lineHeight: 1, marginBottom: 10,
-          transition: 'color 0.4s ease',
+  const Toggle = () => (
+    <div style={{
+      position:'fixed',bottom:28,left:'50%',transform:'translateX(-50%)',
+      zIndex:30,display:'flex',alignItems:'center',
+      background:isDesigner?'#18141f':'#ffffff',
+      border:'1px solid '+(isDesigner?'#2e2640':'#e8e3f0'),
+      borderRadius:100,padding:4,
+      boxShadow:isDesigner?'0 8px 32px rgba(0,0,0,0.5)':'0 8px 32px rgba(26,16,37,0.10)',
+      transition:'all 0.4s ease',
+    }}>
+      <button onClick={()=>setMode('client')} style={{
+        padding:'10px 22px',borderRadius:100,border:'none',
+        fontFamily:'inherit',fontSize:12,fontWeight:600,
+        letterSpacing:'0.06em',textTransform:'uppercase',
+        cursor:'pointer',transition:'all 0.3s ease',
+        background:!isDesigner?'#1a1025':'transparent',
+        color:!isDesigner?'#ffffff':'#5a5a60',whiteSpace:'nowrap',
+      }}>Clientele</button>
+      <button onClick={()=>setMode('designer')} style={{
+        padding:'10px 22px',borderRadius:100,border:'none',
+        fontFamily:'inherit',fontSize:12,fontWeight:600,
+        letterSpacing:'0.06em',textTransform:'uppercase',
+        cursor:'pointer',transition:'all 0.3s ease',
+        background:isDesigner?'#7F63C1':'transparent',
+        color:isDesigner?'#ffffff':'#655a78',whiteSpace:'nowrap',
+      }}>Designer</button>
+    </div>
+  );
+
+  const Socials = ({ size=42, bg='#f0ecf5', color='#655a78', hoverBg, hoverColor }) => (
+    <div style={{display:'flex',gap:14,justifyContent:'center'}}>
+      {['dribbble','behance','instagram','linkedin'].map((s)=>(
+        <div key={s} style={{
+          width:size,height:size,borderRadius:'50%',background:bg,
+          display:'flex',alignItems:'center',justifyContent:'center',
+          cursor:'pointer',transition:'all 0.2s',
+          fontSize:11,color,fontWeight:700,textTransform:'uppercase',
+        }}
+        onMouseEnter={(e)=>{if(hoverBg)e.currentTarget.style.background=hoverBg;if(hoverColor)e.currentTarget.style.color=hoverColor;}}
+        onMouseLeave={(e)=>{e.currentTarget.style.background=bg;e.currentTarget.style.color=color;}}
+        title={s}>{s[0].toUpperCase()}</div>
+      ))}
+    </div>
+  );
+
+  if (!isDesigner) {
+    return (
+      <div style={{minHeight:'100vh',background:'#faf9fc',position:'relative'}}>
+        <style>{`
+          .ld-desk{display:none}.ld-mob{display:flex}
+          @media(min-width:768px){.ld-desk{display:flex!important}.ld-mob{display:none!important}}
+        `}</style>
+
+        {/* DESKTOP CLIENT */}
+        <div className="ld-desk" style={{
+          minHeight:'100vh',flexDirection:'column',alignItems:'center',
+          justifyContent:'center',padding:'60px 60px 100px',position:'relative',overflow:'hidden',
         }}>
-          I. AM. DESIGN.
-        </h1>
-        <p style={{
-          fontSize: 13, color: isDesigner ? '#8a7ea0' : '#655a78',
-          lineHeight: 1.5, transition: 'color 0.4s ease',
-        }}>
-          Ashley M. Pickett · UI/UX & Graphic Designer
-        </p>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 20, marginTop: 6 }}>
-          <a href="mailto:AshleyPickett46@Gmail.com" style={{
-            fontSize: 12, color: isDesigner ? '#7F63C1' : '#6801C2',
-            textDecoration: 'underline', textUnderlineOffset: 2,
-            transition: 'color 0.4s ease',
-          }}>
-            AshleyPickett46@Gmail.com
-          </a>
-          <span style={{
-            fontSize: 12, color: isDesigner ? '#8a7ea0' : '#655a78',
-            transition: 'color 0.4s ease',
-          }}>
-            (509) 609-6956
-          </span>
+          <div style={{position:'absolute',top:80,left:60,width:48,height:48,borderRadius:14,border:'2px solid #e8e3f0',opacity:0.5,transform:'rotate(12deg)'}} />
+          <div style={{position:'absolute',top:140,right:100,width:10,height:10,borderRadius:'50%',background:'#6801C2',opacity:0.18}} />
+          <div style={{position:'absolute',bottom:200,left:120,width:8,height:8,borderRadius:'50%',background:'#00A0C7',opacity:0.2}} />
+          <div style={{position:'absolute',top:200,right:180,width:36,height:36,borderRadius:10,border:'2px solid #efe6fc',opacity:0.4,transform:'rotate(-8deg)'}} />
+
+          <header style={{position:'absolute',top:0,left:0,right:0,display:'flex',alignItems:'center',justifyContent:'space-between',padding:'28px 48px'}}>
+            <h1 style={{fontFamily:"'Playfair Display', serif",fontSize:22,fontWeight:800,color:'#1a1025',letterSpacing:'0.03em',lineHeight:1}}>I. AM. DESIGN.</h1>
+            <a href="mailto:AshleyPickett46@Gmail.com" style={{fontSize:13,color:'#655a78',textDecoration:'none',padding:'8px 16px',borderRadius:8}}>Contact</a>
+          </header>
+
+          <div className="animate-in" style={{textAlign:'center',maxWidth:680,position:'relative',zIndex:1}}>
+            <p style={{fontSize:13,fontWeight:600,letterSpacing:'0.12em',textTransform:'uppercase',color:'#655a78',marginBottom:20}}>
+              Ashley M. Pickett · UI/UX & Graphic Designer
+            </p>
+            <h2 style={{fontFamily:"'Playfair Display', serif",fontSize:56,fontWeight:700,color:'#1a1025',lineHeight:1.12,letterSpacing:'-0.02em',marginBottom:20}}>
+              Let's Build Something<br /><span style={{color:'#6801C2'}}>Beautiful Together</span>
+            </h2>
+            <p style={{fontSize:18,color:'#4a3d5c',lineHeight:1.7,maxWidth:480,margin:'0 auto 40px'}}>
+              Thanks for choosing me for your project. When you're ready, hit the button below to start the questionnaire.
+            </p>
+            <button onClick={()=>onSelect('client')} style={{
+              padding:'18px 44px',borderRadius:12,background:'#6801C2',border:'none',
+              color:'#ffffff',fontSize:17,fontWeight:600,cursor:'pointer',
+              transition:'all 0.25s ease',fontFamily:'inherit',
+              boxShadow:'0 4px 20px rgba(104,1,194,0.2)',marginBottom:24,
+            }}
+            onMouseEnter={(e)=>{e.currentTarget.style.background='#5501a0';e.currentTarget.style.transform='translateY(-2px)';e.currentTarget.style.boxShadow='0 8px 28px rgba(104,1,194,0.3)';}}
+            onMouseLeave={(e)=>{e.currentTarget.style.background='#6801C2';e.currentTarget.style.transform='translateY(0)';e.currentTarget.style.boxShadow='0 4px 20px rgba(104,1,194,0.2)';}}
+            >I'm a Client →</button>
+            <p style={{fontSize:13,color:'#8a7ea0',marginBottom:40}}>This is a No-Obligation Questionnaire</p>
+            <Socials hoverBg="#6801C2" hoverColor="#ffffff" />
+            <p style={{fontSize:12,color:'#8a7ea0',marginTop:12,fontStyle:'italic'}}>If you'd like to follow me — it's majorly appreciated!</p>
+          </div>
         </div>
-      </header>
 
-      {/* ── Hero area ── */}
-      <div style={{
-        margin: '24px 24px 0', borderRadius: 16, overflow: 'hidden',
-        background: isDesigner ? '#18141f' : '#e8e3f0',
-        aspectRatio: '16 / 9', maxHeight: 220,
-        transition: 'background 0.4s ease',
-      }} />
+        {/* MOBILE CLIENT */}
+        <div className="ld-mob" style={{minHeight:'100vh',flexDirection:'column',padding:'0 0 100px'}}>
+          <header style={{padding:'24px 20px 0',textAlign:'center'}}>
+            <h1 style={{fontFamily:"'Playfair Display', serif",fontSize:34,fontWeight:800,letterSpacing:'0.04em',color:'#1a1025',lineHeight:1,marginBottom:8}}>I. AM. DESIGN.</h1>
+            <p style={{fontSize:12,color:'#655a78',lineHeight:1.5}}>Ashley M. Pickett · UI/UX & Graphic Designer</p>
+            <div style={{display:'flex',justifyContent:'center',gap:16,marginTop:4}}>
+              <a href="mailto:AshleyPickett46@Gmail.com" style={{fontSize:11,color:'#6801C2',textDecoration:'underline',textUnderlineOffset:2}}>AshleyPickett46@Gmail.com</a>
+              <span style={{fontSize:11,color:'#655a78'}}>(509) 609-6956</span>
+            </div>
+          </header>
+          <div style={{margin:'20px 20px 0',borderRadius:14,overflow:'hidden',background:'#e8e3f0',aspectRatio:'16 / 9',maxHeight:200}} />
+          <div className="animate-in" style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',padding:'28px 24px 0',textAlign:'center'}}>
+            <h2 style={{fontFamily:"'Playfair Display', serif",fontSize:30,fontWeight:600,color:'#1a1025',marginBottom:10}}>Welcome</h2>
+            <p style={{fontSize:15,color:'#4a3d5c',maxWidth:340,lineHeight:1.65,marginBottom:24}}>
+              Thanks for choosing me for your project! When you're ready, hit the button below to start the questionnaire.
+            </p>
+            <span style={{display:'block',fontSize:26,color:'#d8d0e4',marginBottom:20,lineHeight:1}} aria-hidden="true">↓</span>
+            <button onClick={()=>onSelect('client')} style={{
+              padding:'20px 40px',borderRadius:14,background:'#6801C2',border:'none',
+              color:'#ffffff',fontSize:20,fontWeight:700,cursor:'pointer',
+              transition:'all 0.25s ease',fontFamily:'inherit',textTransform:'uppercase',
+              width:'100%',maxWidth:340,boxShadow:'0 4px 24px rgba(104,1,194,0.2)',
+            }}
+            onMouseEnter={(e)=>{e.currentTarget.style.background='#5501a0';}}
+            onMouseLeave={(e)=>{e.currentTarget.style.background='#6801C2';}}
+            >I'm a Client</button>
+            <p style={{fontSize:11,color:'#655a78',marginTop:12}}>This is a No-Obligation Questionnaire</p>
+            <div style={{marginTop:24}}><Socials size={38} bg="#e8e3f0" color="#655a78" /></div>
+            <p style={{fontSize:11,color:'#8a7ea0',marginTop:10,fontStyle:'italic'}}>If you'd like to follow me — it's majorly appreciated!</p>
+          </div>
+        </div>
+        <Toggle />
+      </div>
+    );
+  }
 
-      {/* ── Main content — switches between Client and Designer ── */}
-      <div className="animate-in" style={{
-        flex: 1, display: 'flex', flexDirection: 'column',
-        alignItems: 'center', padding: '32px 24px 120px',
-        textAlign: 'center',
+  // DESIGNER MODE
+  return (
+    <div data-theme="dark" style={{minHeight:'100vh',background:'#0d0a12',position:'relative'}}>
+      <style>{`
+        .ld-desk{display:none}.ld-mob{display:flex}
+        @media(min-width:768px){.ld-desk{display:flex!important}.ld-mob{display:none!important}}
+      `}</style>
+
+      {/* DESKTOP DESIGNER */}
+      <div className="ld-desk" style={{
+        minHeight:'100vh',flexDirection:'column',alignItems:'center',justifyContent:'center',
+        padding:'60px 60px 100px',position:'relative',overflow:'hidden',
       }}>
-        {!isDesigner ? (
-          /* ─── CLIENT VIEW ─── */
-          <>
-            <h2 style={{
-              fontFamily: "'Playfair Display', serif", fontSize: 32,
-              fontWeight: 600, color: '#1a1025', marginBottom: 12,
-              letterSpacing: '-0.02em',
-            }}>
-              Welcome
-            </h2>
-            <p style={{
-              fontSize: 15, color: '#4a3d5c', maxWidth: 360,
-              lineHeight: 1.65, marginBottom: 28,
-            }}>
-              Thanks for choosing me for your project! When you're
-              ready, hit the button below to start the questionnaire.
-            </p>
-
-            <span style={{
-              display: 'block', fontSize: 28, color: '#655a78',
-              marginBottom: 24, lineHeight: 1,
-            }} aria-hidden="true">↓</span>
-
-            <button
-              onClick={() => onSelect('client')}
-              style={{
-                padding: '22px 48px', borderRadius: 14,
-                background: '#6801C2', border: 'none',
-                color: '#ffffff', fontSize: 22, fontWeight: 700,
-                cursor: 'pointer', transition: 'all 0.25s ease',
-                fontFamily: 'inherit', letterSpacing: '0.03em',
-                textTransform: 'uppercase', width: '100%', maxWidth: 360,
-                boxShadow: '0 4px 24px rgba(104, 1, 194, 0.25)',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = '#5501a0';
-                e.currentTarget.style.transform = 'translateY(-1px)';
-                e.currentTarget.style.boxShadow = '0 6px 28px rgba(104, 1, 194, 0.35)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = '#6801C2';
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 4px 24px rgba(104, 1, 194, 0.25)';
-              }}
-            >
-              I'm a Client
-            </button>
-
-            <p style={{
-              fontSize: 12, color: '#655a78', marginTop: 14,
-              letterSpacing: '0.02em',
-            }}>
-              This is a No-Obligation Questionnaire
-            </p>
-
-            {/* Social icons placeholder */}
-            <div style={{
-              display: 'flex', gap: 16, marginTop: 28, justifyContent: 'center',
-            }}>
-              {['dribbble', 'behance', 'instagram', 'linkedin'].map((s) => (
-                <div key={s} style={{
-                  width: 40, height: 40, borderRadius: '50%',
-                  background: '#e8e3f0', display: 'flex',
-                  alignItems: 'center', justifyContent: 'center',
-                  cursor: 'pointer', transition: 'background 0.2s',
-                  fontSize: 11, color: '#655a78', fontWeight: 600,
-                  textTransform: 'uppercase', letterSpacing: '0.04em',
-                }}
-                  onMouseEnter={(e) => e.currentTarget.style.background = '#d8d0e4'}
-                  onMouseLeave={(e) => e.currentTarget.style.background = '#e8e3f0'}
-                  title={s}
-                >
-                  {s[0].toUpperCase()}
-                </div>
-              ))}
-            </div>
-
-            <p style={{
-              fontSize: 12, color: '#8a7ea0', marginTop: 14,
-              fontStyle: 'italic',
-            }}>
-              If you'd like to follow me — it's majorly appreciated!
-            </p>
-          </>
-        ) : (
-          /* ─── DESIGNER VIEW ─── */
-          <>
-            <p style={{
-              fontSize: 10, fontWeight: 700, letterSpacing: '0.2em',
-              textTransform: 'uppercase', color: '#ff4d4d', marginBottom: 16,
-              fontFamily: "'Space Mono', monospace",
-            }}>
-              Internal Use Only
-            </p>
-            <h2 style={{
-              fontFamily: "'Playfair Display', serif", fontSize: 30,
-              fontWeight: 600, color: '#f0ecf5', marginBottom: 12,
-            }}>
-              Project Metadata
-            </h2>
-            <p style={{
-              fontSize: 15, color: '#8a7ea0', marginBottom: 36,
-              lineHeight: 1.6, maxWidth: 380,
-            }}>
-              Your private process log, client notes, and honest reflections.
-            </p>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: '100%', maxWidth: 340 }}>
-              <button
-                onClick={() => onSelect('designer-fill')}
-                style={{
-                  padding: '18px 24px', borderRadius: 12,
-                  background: '#7F63C1', border: 'none',
-                  color: '#ffffff', fontSize: 16, fontWeight: 600,
-                  cursor: 'pointer', fontFamily: 'inherit',
-                  transition: 'background 0.2s',
-                }}
-                onMouseEnter={(e) => e.currentTarget.style.background = '#9a80d8'}
-                onMouseLeave={(e) => e.currentTarget.style.background = '#7F63C1'}
-              >
-                Fill in online
-              </button>
-              <a
-                href="/creative-brief-complete.pdf"
-                download
-                style={{
-                  padding: '18px 24px', borderRadius: 12,
-                  background: 'transparent', border: '2px solid #2e2640',
-                  color: '#bab0ca', fontSize: 15, fontWeight: 600,
-                  cursor: 'pointer', fontFamily: "'DM Sans', sans-serif",
-                  textDecoration: 'none', textAlign: 'center',
-                  transition: 'border-color 0.2s',
-                }}
-                onMouseEnter={(e) => e.currentTarget.style.borderColor = '#7F63C1'}
-                onMouseLeave={(e) => e.currentTarget.style.borderColor = '#2e2640'}
-              >
-                Download PDF instead
-              </a>
-            </div>
-          </>
-        )}
+        <div style={{position:'absolute',top:'30%',left:'50%',transform:'translate(-50%,-50%)',width:500,height:500,borderRadius:'50%',background:'radial-gradient(circle,rgba(127,99,193,0.06) 0%,transparent 70%)',pointerEvents:'none'}} />
+        <header style={{position:'absolute',top:0,left:0,right:0,display:'flex',alignItems:'center',justifyContent:'space-between',padding:'28px 48px'}}>
+          <h1 style={{fontFamily:"'Playfair Display', serif",fontSize:22,fontWeight:800,color:'#f0ecf5',letterSpacing:'0.03em',lineHeight:1}}>I. AM. DESIGN.</h1>
+          <p style={{fontSize:10,fontWeight:700,letterSpacing:'0.2em',textTransform:'uppercase',color:'#ff4d4d',fontFamily:"'Space Mono', monospace"}}>Internal Use Only</p>
+        </header>
+        <div className="animate-in" style={{textAlign:'center',maxWidth:520,position:'relative',zIndex:1}}>
+          <h2 style={{fontFamily:"'Playfair Display', serif",fontSize:48,fontWeight:700,color:'#f0ecf5',lineHeight:1.15,marginBottom:16}}>Project Metadata</h2>
+          <p style={{fontSize:17,color:'#8a7ea0',lineHeight:1.65,maxWidth:400,margin:'0 auto 44px'}}>
+            Your private process log, client notes, and honest reflections.
+          </p>
+          <div style={{display:'flex',gap:16,justifyContent:'center',flexWrap:'wrap'}}>
+            <button onClick={()=>onSelect('designer-fill')} style={{
+              padding:'18px 40px',borderRadius:12,background:'#7F63C1',border:'none',
+              color:'#ffffff',fontSize:17,fontWeight:600,cursor:'pointer',fontFamily:'inherit',
+              transition:'all 0.25s ease',boxShadow:'0 4px 20px rgba(127,99,193,0.25)',
+            }}
+            onMouseEnter={(e)=>{e.currentTarget.style.background='#9a80d8';e.currentTarget.style.transform='translateY(-2px)';}}
+            onMouseLeave={(e)=>{e.currentTarget.style.background='#7F63C1';e.currentTarget.style.transform='translateY(0)';}}
+            >Fill in Online →</button>
+            <a href="/creative-brief-complete.pdf" download style={{
+              padding:'18px 40px',borderRadius:12,background:'transparent',
+              border:'2px solid #2e2640',color:'#bab0ca',fontSize:17,fontWeight:600,
+              cursor:'pointer',fontFamily:'inherit',textDecoration:'none',textAlign:'center',
+              transition:'border-color 0.25s',
+            }}
+            onMouseEnter={(e)=>e.currentTarget.style.borderColor='#7F63C1'}
+            onMouseLeave={(e)=>e.currentTarget.style.borderColor='#2e2640'}
+            >Download PDF</a>
+          </div>
+        </div>
       </div>
 
-      {/* ── Bottom toggle bar ── */}
-      <div style={{
-        position: 'fixed', bottom: 0, left: 0, right: 0,
-        display: 'flex', zIndex: 20,
-        background: isDesigner ? '#110e17' : '#ffffff',
-        borderTop: `1px solid ${isDesigner ? '#2e2640' : '#e8e3f0'}`,
-        transition: 'background 0.4s ease, border-color 0.4s ease',
-      }}>
-        <button
-          onClick={() => setMode('client')}
-          style={{
-            flex: 1, padding: '16px', border: 'none',
-            fontFamily: 'inherit', fontSize: 13, fontWeight: 700,
-            letterSpacing: '0.08em', textTransform: 'uppercase',
-            cursor: 'pointer', transition: 'all 0.3s ease',
-            background: !isDesigner ? '#1a1025' : 'transparent',
-            color: !isDesigner ? '#ffffff' : (isDesigner ? '#5a5a60' : '#655a78'),
-          }}
-        >
-          Client View
-        </button>
-        <button
-          onClick={() => setMode('designer')}
-          style={{
-            flex: 1, padding: '16px', border: 'none',
-            fontFamily: 'inherit', fontSize: 13, fontWeight: 700,
-            letterSpacing: '0.08em', textTransform: 'uppercase',
-            cursor: 'pointer', transition: 'all 0.3s ease',
-            background: isDesigner ? '#7F63C1' : 'transparent',
-            color: isDesigner ? '#ffffff' : '#655a78',
-          }}
-        >
-          Designer View
-        </button>
+      {/* MOBILE DESIGNER */}
+      <div className="ld-mob" style={{minHeight:'100vh',flexDirection:'column',padding:'0 0 100px'}}>
+        <header style={{padding:'24px 20px 0',textAlign:'center'}}>
+          <h1 style={{fontFamily:"'Playfair Display', serif",fontSize:34,fontWeight:800,letterSpacing:'0.04em',color:'#f0ecf5',lineHeight:1,marginBottom:8}}>I. AM. DESIGN.</h1>
+          <p style={{fontSize:10,fontWeight:700,letterSpacing:'0.2em',textTransform:'uppercase',color:'#ff4d4d',fontFamily:"'Space Mono', monospace"}}>Internal Use Only</p>
+        </header>
+        <div style={{margin:'20px 20px 0',borderRadius:14,overflow:'hidden',background:'#18141f',aspectRatio:'16 / 9',maxHeight:200}} />
+        <div className="animate-in" style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',padding:'28px 24px 0',textAlign:'center'}}>
+          <h2 style={{fontFamily:"'Playfair Display', serif",fontSize:28,fontWeight:600,color:'#f0ecf5',marginBottom:10}}>Project Metadata</h2>
+          <p style={{fontSize:14,color:'#8a7ea0',marginBottom:28,lineHeight:1.6,maxWidth:320}}>
+            Your private process log, client notes, and honest reflections.
+          </p>
+          <div style={{display:'flex',flexDirection:'column',gap:12,width:'100%',maxWidth:320}}>
+            <button onClick={()=>onSelect('designer-fill')} style={{
+              padding:'18px 24px',borderRadius:12,background:'#7F63C1',border:'none',
+              color:'#ffffff',fontSize:16,fontWeight:600,cursor:'pointer',fontFamily:'inherit',
+            }}>Fill in Online</button>
+            <a href="/creative-brief-complete.pdf" download style={{
+              padding:'18px 24px',borderRadius:12,background:'transparent',
+              border:'2px solid #2e2640',color:'#bab0ca',fontSize:15,fontWeight:600,
+              textDecoration:'none',textAlign:'center',
+            }}>Download PDF</a>
+          </div>
+        </div>
       </div>
+      <Toggle />
     </div>
   );
 }
@@ -412,15 +375,12 @@ function DeepDivePrompt({ onChoice }) {
   );
 }
 
-// ─── (Designer landing merged into Landing toggle) ──────────
-
 // ─── FORM ENGINE ─────────────────────────────────────────────
 function BriefForm({ sections, version, accentColor, isDark, onSubmit, onBack, introText, signoff }) {
   const [step, setStep] = useState(0);
   const [data, setData] = useState({});
   const contentRef = useRef(null);
 
-  // Safety: clamp step to valid range
   const safeStep = Math.max(0, Math.min(step, sections.length - 1));
   if (safeStep !== step) setStep(safeStep);
 
@@ -484,10 +444,8 @@ function BriefForm({ sections, version, accentColor, isDark, onSubmit, onBack, i
       background: isDark ? '#0d0a12' : 'var(--bg)',
       color: isDark ? '#f0ecf5' : 'var(--text)',
     }}>
-      {/* Skip link */}
       <a href="#main-form" className="skip-link">Skip to form</a>
 
-      {/* Header */}
       <header style={{
         background: isDark ? '#110e17' : accentColor,
         padding: '24px 24px 20px',
@@ -516,7 +474,6 @@ function BriefForm({ sections, version, accentColor, isDark, onSubmit, onBack, i
         </div>
       </header>
 
-      {/* Intro text on first section */}
       {step === 0 && introText && (
         <div style={{ maxWidth: 680, margin: '0 auto', padding: '20px 24px 0' }}>
           <p className="animate-in" style={{
@@ -528,7 +485,6 @@ function BriefForm({ sections, version, accentColor, isDark, onSubmit, onBack, i
         </div>
       )}
 
-      {/* Form content */}
       <main id="main-form" ref={contentRef} style={{
         flex: 1, overflowY: 'auto', padding: '28px 20px 140px',
       }}>
@@ -557,7 +513,6 @@ function BriefForm({ sections, version, accentColor, isDark, onSubmit, onBack, i
         </div>
       </main>
 
-      {/* Navigation footer */}
       <footer style={{
         position: 'fixed', bottom: 0, left: 0, right: 0,
         background: isDark ? '#110e17' : 'var(--card)',
@@ -582,7 +537,6 @@ function BriefForm({ sections, version, accentColor, isDark, onSubmit, onBack, i
             ← {step > 0 ? 'Back' : 'Exit'}
           </button>
 
-          {/* Dots */}
           <div style={{ display: 'flex', gap: 5, alignItems: 'center' }} role="tablist" aria-label="Form sections">
             {sections.map((_, i) => (
               <button
@@ -692,7 +646,7 @@ function Success({ version, onReset }) {
 export default function Home() {
   const [screen, setScreen] = useState('landing');
   const [clientVersion, setClientVersion] = useState(null);
-  const [phase, setPhase] = useState(null); // 'brief' | 'deepdive' | 'done'
+  const [phase, setPhase] = useState(null);
   const [combinedData, setCombinedData] = useState({});
   const [deepDiveCompleted, setDeepDiveCompleted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -725,17 +679,14 @@ export default function Home() {
     setSubmitted(false);
   };
 
-  // === SUBMITTED ===
   if (submitted) {
     return <Success version={clientVersion === 'private' ? 'private' : clientVersion} onReset={reset} />;
   }
 
-  // === LANDING ===
   if (screen === 'landing') {
     return <Landing onSelect={(role) => setScreen(role)} />;
   }
 
-  // === DESIGNER PATH (entered via toggle on landing) ===
   if (screen === 'designer-fill') {
     return (
       <BriefForm
@@ -756,21 +707,17 @@ export default function Home() {
     );
   }
 
-  // === CLIENT PATH ===
   if (screen === 'client') {
-    // Step 1: Pick A or B
     if (!clientVersion) {
       return <ClientPicker onPick={(v) => { setClientVersion(v); setPhase(v === 'a' ? 'ask-deep' : 'brief'); }} />;
     }
 
-    // Step 2 (Version A only): Ask about deep dive
     if (phase === 'ask-deep') {
       return <DeepDivePrompt onChoice={(c) => {
         setPhase(c === 'deep-first' ? 'deepdive-before' : 'brief');
       }} />;
     }
 
-    // Deep dive BEFORE brief (Version A chose this)
     if (phase === 'deepdive-before') {
       return (
         <BriefForm
@@ -791,13 +738,12 @@ export default function Home() {
       );
     }
 
-    // Main brief (A or B)
     if (phase === 'brief') {
       const sections = clientVersion === 'a' ? VERSION_A : VERSION_B;
       const color = clientVersion === 'a' ? '#6801C2' : '#00A0C7';
       const intro = clientVersion === 'a'
         ? "Hi! I'm so excited to work with you. Fill this out as best you can — the more detail, the better. No wrong answers."
-        : "This is a safe space — just answer what you can. Write whatever comes to mind — even 'I don't know' is a great answer. I'll help us figure out the rest.";
+        : "This is a safe space — just answer what can. Write whatever comes to mind — even 'I don't know' is a great answer. I'll help us figure out the rest.";
 
       return (
         <BriefForm
@@ -811,20 +757,15 @@ export default function Home() {
           onBack={() => { setClientVersion(null); setPhase(null); }}
           onSubmit={(data) => {
             setCombinedData((prev) => ({ ...prev, ...data }));
-            // If Version A didn't do deep dive yet, go to it now
-            // If Version B, always go to deep dive
             setPhase('deepdive-after');
           }}
         />
       );
     }
 
-    // Deep dive AFTER brief
     if (phase === 'deepdive-after') {
-      // If they already did deep dive before brief (Version A), skip to submit
       const alreadyDid = deepDiveCompleted;
       if (alreadyDid) {
-        // Transition to a submitting phase instead of calling async in render
         if (!submitting && !submitted) {
           submit(clientVersion, combinedData).then(() => setSubmitted(true));
         }
