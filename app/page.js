@@ -11,8 +11,7 @@ function Landing({ onSelect }) {
 
   const Toggle = () => (
     <div className="glass" style={{
-      position:'fixed',bottom:28,left:'50%',transform:'translateX(-50%)',
-      zIndex:30,display:'flex',alignItems:'center',
+      display:'inline-flex',alignItems:'center',
       borderRadius:100,padding:4,
     }}>
       <button onClick={()=>setMode('client')} style={{
@@ -94,12 +93,13 @@ function Landing({ onSelect }) {
             <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:13,color:'var(--text-helper)',marginBottom:40}}>This is a No-Obligation Questionnaire</p>
             <Socials />
             <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:12,color:'var(--text-secondary)',marginTop:12,fontStyle:'italic'}}>If you'd like to follow me — it's majorly appreciated!</p>
+            <div style={{marginTop:32}}><Toggle /></div>
           </div>
         </div>
 
         {/* MOBILE CLIENT */}
-        <div className="ld-mob" style={{minHeight:'100vh',flexDirection:'column',padding:'0 0 100px'}}>
-          <header style={{padding:'24px 20px 0',textAlign:'center'}}>
+        <div className="ld-mob" style={{minHeight:'100vh',flexDirection:'column',padding:0}}>
+          <header style={{padding:'24px 20px 0',textAlign:'center',width:'100%'}}>
             <h1 style={{fontFamily:"'Playfair Display', serif",fontSize:34,fontWeight:800,letterSpacing:'0.04em',color:'var(--text)',lineHeight:1,marginBottom:8}}>I. AM. DESIGN.</h1>
             <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:12,color:'var(--text-helper)',lineHeight:1.5}}>Ashley M. Pickett · UI/UX & Graphic Designer</p>
             <div style={{display:'flex',justifyContent:'center',gap:16,marginTop:4}}>
@@ -108,7 +108,7 @@ function Landing({ onSelect }) {
             </div>
           </header>
           <div style={{margin:'20px 20px 0',borderRadius:14,overflow:'hidden',background:'var(--border-light)',aspectRatio:'16 / 9',maxHeight:200}} />
-          <div className="animate-in" style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',padding:'28px 24px 0',textAlign:'center'}}>
+          <div className="animate-in" style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',padding:'28px 24px 0',textAlign:'center',width:'100%'}}>
             <h2 style={{fontFamily:"'Playfair Display', serif",fontSize:30,fontWeight:600,color:'var(--text)',marginBottom:10}}>Welcome</h2>
             <p style={{fontSize:15,color:'var(--text-secondary)',maxWidth:340,lineHeight:1.65,marginBottom:24}}>
               Thanks for choosing me for your project! When you're ready, hit the button below to start the questionnaire.
@@ -127,9 +127,9 @@ function Landing({ onSelect }) {
             <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:11,color:'var(--text-helper)',marginTop:12}}>This is a No-Obligation Questionnaire</p>
             <div style={{marginTop:24}}><Socials size={38} /></div>
             <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:11,color:'var(--text-secondary)',marginTop:10,fontStyle:'italic'}}>If you'd like to follow me — it's majorly appreciated!</p>
+            <div style={{marginTop:28,marginBottom:40}}><Toggle /></div>
           </div>
         </div>
-        <Toggle />
       </div>
     );
   }
@@ -173,17 +173,18 @@ function Landing({ onSelect }) {
             onMouseLeave={(e)=>e.currentTarget.style.borderColor='var(--border)'}
             >Download PDF</a>
           </div>
+          <div style={{marginTop:36}}><Toggle /></div>
         </div>
       </div>
 
       {/* MOBILE DESIGNER */}
-      <div className="ld-mob" style={{minHeight:'100vh',flexDirection:'column',padding:'0 0 100px'}}>
-        <header style={{padding:'24px 20px 0',textAlign:'center'}}>
+      <div className="ld-mob" style={{minHeight:'100vh',flexDirection:'column',padding:0}}>
+        <header style={{padding:'24px 20px 0',textAlign:'center',width:'100%'}}>
           <h1 style={{fontFamily:"'Playfair Display', serif",fontSize:34,fontWeight:800,letterSpacing:'0.04em',color:'var(--text)',lineHeight:1,marginBottom:8}}>I. AM. DESIGN.</h1>
           <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:10,fontWeight:700,letterSpacing:'0.2em',textTransform:'uppercase',color:'#E74C3C'}}>Internal Use Only</p>
         </header>
         <div style={{margin:'20px 20px 0',borderRadius:14,overflow:'hidden',background:'var(--card)',aspectRatio:'16 / 9',maxHeight:200}} />
-        <div className="animate-in" style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',padding:'28px 24px 0',textAlign:'center'}}>
+        <div className="animate-in" style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',padding:'28px 24px 0',textAlign:'center',width:'100%'}}>
           <h2 style={{fontFamily:"'Playfair Display', serif",fontSize:28,fontWeight:600,color:'var(--text)',marginBottom:10}}>Project Metadata</h2>
           <p style={{fontSize:14,color:'var(--text-secondary)',marginBottom:28,lineHeight:1.6,maxWidth:320}}>
             Your private process log, client notes, and honest reflections.
@@ -199,9 +200,9 @@ function Landing({ onSelect }) {
               textDecoration:'none',textAlign:'center',fontFamily:"'Sarabun', sans-serif",
             }}>Download PDF</a>
           </div>
+          <div style={{marginTop:28,marginBottom:40}}><Toggle /></div>
         </div>
       </div>
-      <Toggle />
     </div>
   );
 }
