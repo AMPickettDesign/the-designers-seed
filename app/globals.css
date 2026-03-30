@@ -191,6 +191,13 @@ body {
   background: var(--bg);
   -webkit-font-smoothing: antialiased;
   line-height: 1.6;
+  text-wrap: pretty;
+  overflow-x: hidden;
+}
+
+p, h1, h2, h3, h4, h5, h6, li {
+  orphans: 3;
+  widows: 3;
 }
 
 ::selection {
@@ -249,15 +256,24 @@ button { font-family: 'Sarabun', sans-serif; }
 /* ── Animations — respect reduced motion ── */
 @media (prefers-reduced-motion: no-preference) {
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(12px); }
+    from { opacity: 0; transform: translateY(40px); }
     to { opacity: 1; transform: translateY(0); }
   }
   @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
   }
-  .animate-in { animation: fadeUp 0.35s ease-out forwards; }
-  .animate-delay { animation: fadeUp 0.35s ease-out 0.08s forwards; opacity: 0; }
+  @keyframes staggerIn {
+    from { opacity: 0; transform: translateY(30px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .animate-in { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  .animate-in-1 { animation: staggerIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards; opacity: 0; }
+  .animate-in-2 { animation: staggerIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.25s forwards; opacity: 0; }
+  .animate-in-3 { animation: staggerIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards; opacity: 0; }
+  .animate-in-4 { animation: staggerIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.55s forwards; opacity: 0; }
+  .animate-in-5 { animation: staggerIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards; opacity: 0; }
+  .animate-delay { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.08s forwards; opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -269,6 +285,68 @@ button { font-family: 'Sarabun', sans-serif; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--text-helper); }
+
+/* ── Section label (portfolio style — dash prefix) ── */
+.section-label {
+  font-family: 'Sarabun', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  display: inline-block;
+  position: relative;
+  padding-left: 2rem;
+}
+.section-label::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.2rem;
+  height: 2px;
+  background: var(--accent);
+}
+
+/* ── Portfolio-matching button base ── */
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 2.2rem;
+  font-family: 'Sarabun', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+}
+.btn-pill:hover {
+  transform: translateY(-3px);
+}
+.btn-pill--primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.btn-pill--primary:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  box-shadow: 0 10px 30px rgba(76, 48, 115, 0.25);
+}
+.btn-pill--outline {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border);
+}
+.btn-pill--outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 8px 25px rgba(76, 48, 115, 0.1);
+}
 
 /* ── Responsive helpers ── */
 .ld-desk { display: none; }

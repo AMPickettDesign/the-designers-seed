@@ -9,30 +9,31 @@ function Landing({ onSelect }) {
   const [mode, setMode] = useState('client');
   const isDesigner = mode === 'designer';
 
+  // ── Slide toggle (portfolio pill style) ──
   const Toggle = () => (
     <div className="glass" style={{
-      display:'inline-flex',alignItems:'center',
-      borderRadius:100,padding:4,
+      display:'inline-flex',alignItems:'center',borderRadius:9999,padding:4,
     }}>
       <button onClick={()=>setMode('client')} style={{
-        padding:'10px 22px',borderRadius:100,border:'none',
-        fontFamily:"'Sarabun', sans-serif",fontSize:13,fontWeight:600,
+        padding:'10px 22px',borderRadius:9999,border:'none',
+        fontFamily:"'Sarabun', sans-serif",fontSize:'0.8rem',fontWeight:600,
         letterSpacing:'0.06em',textTransform:'uppercase',
-        cursor:'pointer',transition:'all 0.3s ease',
+        cursor:'pointer',transition:'all 0.2s cubic-bezier(0.16,1,0.3,1)',
         background:!isDesigner?'var(--accent)':'transparent',
-        color:!isDesigner?'#ffffff':'var(--text-secondary)',whiteSpace:'nowrap',
+        color:!isDesigner?'#fff':'var(--text-secondary)',whiteSpace:'nowrap',
       }}>Clientele</button>
       <button onClick={()=>setMode('designer')} style={{
-        padding:'10px 22px',borderRadius:100,border:'none',
-        fontFamily:"'Sarabun', sans-serif",fontSize:13,fontWeight:600,
+        padding:'10px 22px',borderRadius:9999,border:'none',
+        fontFamily:"'Sarabun', sans-serif",fontSize:'0.8rem',fontWeight:600,
         letterSpacing:'0.06em',textTransform:'uppercase',
-        cursor:'pointer',transition:'all 0.3s ease',
+        cursor:'pointer',transition:'all 0.2s cubic-bezier(0.16,1,0.3,1)',
         background:isDesigner?'var(--purple-soft)':'transparent',
-        color:isDesigner?'#ffffff':'var(--text-secondary)',whiteSpace:'nowrap',
+        color:isDesigner?'#fff':'var(--text-secondary)',whiteSpace:'nowrap',
       }}>Designer</button>
     </div>
   );
 
+  // ── Social links ──
   const socialLinks = [
     { name: 'github', url: 'https://ampickettdesign.github.io/', label: 'G' },
     { name: 'linkedin', url: '#', label: 'L' },
@@ -40,245 +41,271 @@ function Landing({ onSelect }) {
     { name: 'pinterest', url: '#', label: 'P' },
   ];
 
-  const Socials = ({ size=42, bg='var(--border-light)', color='var(--text-helper)' }) => (
-    <div style={{display:'flex',gap:14,justifyContent:'center'}}>
+  const Socials = ({ size=36, light=true }) => (
+    <div style={{display:'flex',gap:12,justifyContent:'center'}}>
       {socialLinks.map((s)=>(
         <a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer" style={{
-          width:size,height:size,borderRadius:'50%',background:bg,
+          width:size,height:size,borderRadius:'50%',
+          background:light?'var(--card)':'rgba(255,255,255,0.06)',
+          border:light?'1px solid var(--border-light)':'1px solid rgba(255,255,255,0.1)',
           display:'flex',alignItems:'center',justifyContent:'center',
-          cursor:'pointer',transition:'all 0.2s',
-          fontSize:11,color,fontWeight:700,textTransform:'uppercase',
+          cursor:'pointer',transition:'all 0.2s cubic-bezier(0.16,1,0.3,1)',
+          fontSize:11,color:light?'var(--text-helper)':'rgba(255,255,255,0.4)',
+          fontWeight:700,textTransform:'uppercase',
           fontFamily:"'Sarabun', sans-serif",textDecoration:'none',
         }}
-        onMouseEnter={(e)=>{e.currentTarget.style.background='var(--accent)';e.currentTarget.style.color='#ffffff';}}
-        onMouseLeave={(e)=>{e.currentTarget.style.background=bg;e.currentTarget.style.color=color;}}
+        onMouseEnter={(e)=>{
+          e.currentTarget.style.background='var(--accent)';
+          e.currentTarget.style.color='#fff';
+          e.currentTarget.style.borderColor='var(--accent)';
+          e.currentTarget.style.transform='translateY(-2px)';
+        }}
+        onMouseLeave={(e)=>{
+          e.currentTarget.style.background=light?'var(--card)':'rgba(255,255,255,0.06)';
+          e.currentTarget.style.color=light?'var(--text-helper)':'rgba(255,255,255,0.4)';
+          e.currentTarget.style.borderColor=light?'var(--border-light)':'rgba(255,255,255,0.1)';
+          e.currentTarget.style.transform='translateY(0)';
+        }}
         title={s.name}>{s.label}</a>
       ))}
     </div>
   );
 
-  // ═══ CLIENT MODE ═══
+  // ═══════════════════════════════════════════
+  // CLIENT MODE
+  // ═══════════════════════════════════════════
   if (!isDesigner) {
     return (
-      <div style={{minHeight:'100vh',background:'var(--bg)',position:'relative'}}>
+      <div style={{minHeight:'100vh',background:'var(--bg)'}}>
 
-        {/* DESKTOP CLIENT */}
-        <div className="ld-desk" style={{
-          minHeight:'100vh',flexDirection:'column',
-        }}>
-          {/* Top nav bar */}
+        {/* ──── DESKTOP ──── */}
+        <div className="ld-desk" style={{minHeight:'100vh',flexDirection:'column'}}>
+          {/* Glass nav */}
           <header style={{
             display:'flex',alignItems:'center',justifyContent:'space-between',
-            padding:'24px 48px',borderBottom:'1px solid var(--border-light)',
+            padding:'0 3rem',height:72,
+            background:'rgba(248,247,250,0.85)',
+            backdropFilter:'blur(20px)',WebkitBackdropFilter:'blur(20px)',
+            borderBottom:'1px solid transparent',
           }}>
-            <h1 style={{fontFamily:"'Playfair Display', serif",fontSize:28,fontWeight:800,color:'var(--text)',letterSpacing:'0.03em',lineHeight:1}}>I. AM. DESIGN.</h1>
-            <div style={{display:'flex',alignItems:'center',gap:24}}>
-              <Socials size={34} />
-              <a href="mailto:AshleyPickett46@Gmail.com" style={{
-                fontFamily:"'Sarabun', sans-serif",fontSize:14,fontWeight:600,
-                color:'var(--text-on-accent)',textDecoration:'none',
-                padding:'10px 24px',borderRadius:100,background:'var(--accent)',
-                transition:'background 0.2s ease',
-              }}
-              onMouseEnter={(e)=>e.currentTarget.style.background='var(--accent-hover)'}
-              onMouseLeave={(e)=>e.currentTarget.style.background='var(--accent)'}
-              >Contact</a>
+            <a href="#" style={{fontFamily:"'Playfair Display',serif",fontSize:'1.5rem',fontWeight:700,color:'var(--text)',textDecoration:'none',letterSpacing:'-0.02em'}}>
+              AMP<span style={{color:'var(--accent)'}}>.</span>
+            </a>
+            <div style={{display:'flex',alignItems:'center',gap:'2rem'}}>
+              <Socials size={32} />
+              <a href="mailto:AshleyPickett46@Gmail.com" className="btn-pill btn-pill--primary" style={{padding:'0.55rem 1.4rem',fontSize:'0.9rem'}}>
+                Contact
+              </a>
             </div>
           </header>
 
-          {/* Split hero */}
+          {/* Hero — centered, portfolio style */}
           <div style={{
-            flex:1,display:'flex',alignItems:'center',
-            padding:'0 48px 48px',gap:48,maxWidth:1280,margin:'0 auto',width:'100%',
+            flex:1,display:'flex',flexDirection:'column',alignItems:'center',
+            justifyContent:'center',padding:'4rem 2rem 3rem',textAlign:'center',
+            maxWidth:1400,margin:'0 auto',width:'100%',position:'relative',
           }}>
-            {/* Left — content */}
-            <div className="animate-in" style={{flex:1,maxWidth:560}}>
-              <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:13,fontWeight:600,letterSpacing:'0.12em',textTransform:'uppercase',color:'var(--text-helper)',marginBottom:16}}>
-                Ashley M. Pickett · UI/UX & Graphic Designer
-              </p>
-              <h2 style={{fontFamily:"'Playfair Display', serif",fontSize:52,fontWeight:700,color:'var(--text)',lineHeight:1.1,letterSpacing:'-0.02em',marginBottom:20}}>
-                Let's Build<br />Something<br /><span style={{color:'var(--accent)'}}>Beautiful Together</span>
-              </h2>
-              <p style={{fontFamily:"'Nunito Sans', sans-serif",fontSize:17,color:'var(--text-secondary)',lineHeight:1.7,maxWidth:440,marginBottom:36,textWrap:'balance'}}>
-                Thanks for choosing me for your project. When you're ready, hit the button below to start the questionnaire.
-              </p>
-              <div style={{display:'flex',gap:14,alignItems:'center',flexWrap:'wrap',marginBottom:16}}>
-                <button onClick={()=>onSelect('client')} style={{
-                  padding:'16px 36px',borderRadius:100,background:'var(--accent)',border:'none',
-                  color:'#ffffff',fontSize:15,fontWeight:600,cursor:'pointer',
-                  transition:'all 0.25s ease',fontFamily:"'Sarabun', sans-serif",
-                  boxShadow:'0 4px 20px rgba(93,44,115,0.2)',
-                }}
-                onMouseEnter={(e)=>{e.currentTarget.style.background='var(--accent-hover)';e.currentTarget.style.transform='translateY(-2px)';e.currentTarget.style.boxShadow='0 8px 28px rgba(93,44,115,0.3)';}}
-                onMouseLeave={(e)=>{e.currentTarget.style.background='var(--accent)';e.currentTarget.style.transform='translateY(0)';e.currentTarget.style.boxShadow='0 4px 20px rgba(93,44,115,0.2)';}}
-                >I'm a Client →</button>
-                <Toggle />
-              </div>
-              <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:13,color:'var(--text-helper)'}}>This is a No-Obligation Questionnaire</p>
+            <p className="section-label animate-in-1" style={{marginBottom:'1rem'}}>
+              UI/UX & Graphic Designer
+            </p>
+            <h1 className="animate-in-2" style={{
+              fontFamily:"'Playfair Display',serif",
+              fontSize:'clamp(2.8rem, 6vw, 5rem)',fontWeight:700,
+              lineHeight:1.05,letterSpacing:'-0.03em',
+              color:'var(--text)',marginBottom:'1.25rem',
+            }}>
+              I. AM.<br />
+              <span style={{color:'var(--accent)',fontStyle:'italic'}}>DESIGN</span>.
+            </h1>
+            <p className="animate-in-3" style={{
+              fontSize:'clamp(1rem, 1.8vw, 1.25rem)',color:'var(--text-secondary)',
+              maxWidth:580,lineHeight:1.7,marginBottom:'2rem',textWrap:'balance',
+            }}>
+              Thanks for choosing me for your project. When you're ready,
+              hit the button below to start the questionnaire.
+            </p>
+            <div className="animate-in-4" style={{display:'flex',gap:'1rem',flexWrap:'wrap',justifyContent:'center',alignItems:'center',marginBottom:'0.75rem'}}>
+              <button onClick={()=>onSelect('client')} className="btn-pill btn-pill--primary">
+                I'm a Client →
+              </button>
+              <Toggle />
             </div>
+            <p className="animate-in-5" style={{
+              fontFamily:"'Sarabun',sans-serif",fontSize:'0.85rem',
+              color:'var(--text-helper)',letterSpacing:'0.04em',marginBottom:'3rem',
+            }}>This is a No-Obligation Questionnaire</p>
 
-            {/* Right — visual area */}
-            <div style={{flex:1,display:'flex',alignItems:'stretch',position:'relative',overflow:'visible'}}>
-              <img 
-                src="/hero-image.png" 
-                alt="Portfolio hero image" 
-                style={{
-                  width:'100%',
-                  height:'100%',
-                  objectFit:'cover',
-                  borderRadius:24,
-                  minHeight:500,
-                }} 
-              />
+            {/* Hero image — full width below content, portfolio card style */}
+            <div className="animate-in-5" style={{
+              width:'100%',maxWidth:960,borderRadius:32,overflow:'hidden',
+              border:'1px solid var(--border-light)',
+              boxShadow:'0 20px 60px rgba(76,48,115,0.08)',
+            }}>
+              <img src="/hero-image.png" alt="Portfolio preview" style={{
+                width:'100%',height:'auto',display:'block',
+              }} />
             </div>
           </div>
         </div>
 
-        {/* MOBILE CLIENT */}
-        <div className="ld-mob" style={{minHeight:'100vh',flexDirection:'column',padding:0,alignItems:'center'}}>
-          <header style={{padding:'24px 20px 0',textAlign:'center',width:'100%'}}>
-            <h1 style={{fontFamily:"'Playfair Display', serif",fontSize:34,fontWeight:800,letterSpacing:'0.04em',color:'var(--text)',lineHeight:1,marginBottom:6}}>I. AM. DESIGN.</h1>
-            <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:12,color:'var(--text-helper)',lineHeight:1.5,marginBottom:14}}>Ashley M. Pickett · UI/UX & Graphic Designer</p>
-            <a href="mailto:AshleyPickett46@Gmail.com" style={{
-              display:'inline-block',fontFamily:"'Sarabun', sans-serif",fontSize:12,fontWeight:600,
-              color:'var(--text-on-accent)',textDecoration:'none',
-              padding:'10px 22px',borderRadius:100,background:'var(--accent)',
-              transition:'background 0.2s ease',
-            }}
-            onMouseEnter={(e)=>e.currentTarget.style.background='var(--accent-hover)'}
-            onMouseLeave={(e)=>e.currentTarget.style.background='var(--accent)'}
-            >Contact</a>
+        {/* ──── MOBILE ──── */}
+        <div className="ld-mob" style={{minHeight:'100vh',flexDirection:'column',alignItems:'center'}}>
+          {/* Mobile nav */}
+          <header style={{
+            display:'flex',alignItems:'center',justifyContent:'space-between',
+            padding:'0 1.25rem',height:64,width:'100%',
+            borderBottom:'1px solid var(--border-light)',
+          }}>
+            <span style={{fontFamily:"'Playfair Display',serif",fontSize:'1.3rem',fontWeight:700,color:'var(--text)',letterSpacing:'-0.02em'}}>
+              AMP<span style={{color:'var(--accent)'}}>.</span>
+            </span>
+            <a href="mailto:AshleyPickett46@Gmail.com" className="btn-pill btn-pill--primary" style={{padding:'0.45rem 1.2rem',fontSize:'0.8rem'}}>
+              Contact
+            </a>
           </header>
-          <img src="/hero-image.png" alt="Portfolio hero image" style={{margin:'20px auto 0',width:'calc(100% - 40px)',maxWidth:400,borderRadius:14,objectFit:'cover'}} />
-          <div className="animate-in" style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',padding:'28px 24px 0',textAlign:'center',width:'100%'}}>
-            <h2 style={{fontFamily:"'Playfair Display', serif",fontSize:30,fontWeight:600,color:'var(--text)',marginBottom:10}}>Welcome</h2>
-            <p style={{fontSize:15,color:'var(--text-secondary)',maxWidth:340,lineHeight:1.65,marginBottom:24,textWrap:'balance'}}>
-              Thanks for choosing me for your project! When you're ready, hit the button below to start the questionnaire.
+
+          {/* Hero image */}
+          <div className="animate-in" style={{
+            margin:'1.25rem auto 0',width:'calc(100% - 2.5rem)',maxWidth:400,
+            borderRadius:20,overflow:'hidden',
+            border:'1px solid var(--border-light)',
+            boxShadow:'0 8px 30px rgba(76,48,115,0.06)',
+          }}>
+            <img src="/hero-image.png" alt="Portfolio preview" style={{width:'100%',height:'auto',display:'block'}} />
+          </div>
+
+          {/* Content */}
+          <div style={{
+            flex:1,display:'flex',flexDirection:'column',alignItems:'center',
+            padding:'1.75rem 1.5rem 0',textAlign:'center',width:'100%',
+          }}>
+            <p className="section-label animate-in-1" style={{marginBottom:'0.75rem',fontSize:'0.7rem'}}>
+              UI/UX & Graphic Designer
             </p>
-            <span style={{display:'block',fontSize:26,color:'var(--border)',marginBottom:20,lineHeight:1}} aria-hidden="true">↓</span>
-            <button onClick={()=>onSelect('client')} style={{
-              padding:'20px 40px',borderRadius:14,background:'var(--accent)',border:'none',
-              color:'#ffffff',fontSize:18,fontWeight:700,cursor:'pointer',
-              transition:'all 0.25s ease',fontFamily:"'Sarabun', sans-serif",
-              textTransform:'uppercase',width:'100%',maxWidth:340,
-              boxShadow:'0 4px 24px rgba(93,44,115,0.2)',
-            }}
-            onMouseEnter={(e)=>{e.currentTarget.style.background='var(--accent-hover)';}}
-            onMouseLeave={(e)=>{e.currentTarget.style.background='var(--accent)';}}
-            >I'm a Client</button>
-            <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:11,color:'var(--text-helper)',marginTop:12}}>This is a No-Obligation Questionnaire</p>
-            <div style={{marginTop:24}}><Socials size={38} /></div>
-            <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:11,color:'var(--text-secondary)',marginTop:10,fontStyle:'italic'}}>If you'd like to follow me — it's majorly appreciated!</p>
-            <div style={{marginTop:28,marginBottom:40}}><Toggle /></div>
+            <h1 className="animate-in-2" style={{
+              fontFamily:"'Playfair Display',serif",
+              fontSize:'clamp(2.2rem, 9vw, 3rem)',fontWeight:700,
+              lineHeight:1.05,letterSpacing:'-0.03em',
+              color:'var(--text)',marginBottom:'0.75rem',
+            }}>
+              I. AM.<br />
+              <span style={{color:'var(--accent)',fontStyle:'italic'}}>DESIGN</span>.
+            </h1>
+            <p className="animate-in-3" style={{
+              fontSize:'1rem',color:'var(--text-secondary)',
+              maxWidth:340,lineHeight:1.65,marginBottom:'1.5rem',textWrap:'balance',
+            }}>
+              Thanks for choosing me for your project! When you're ready,
+              hit the button below to start the questionnaire.
+            </p>
+            <button className="animate-in-4 btn-pill btn-pill--primary" onClick={()=>onSelect('client')} style={{width:'100%',maxWidth:320,padding:'1rem 2rem',fontSize:'1rem'}}>
+              I'm a Client →
+            </button>
+            <p className="animate-in-4" style={{
+              fontFamily:"'Sarabun',sans-serif",fontSize:'0.75rem',
+              color:'var(--text-helper)',marginTop:'0.75rem',marginBottom:'1.5rem',
+            }}>This is a No-Obligation Questionnaire</p>
+            <div className="animate-in-5"><Socials size={36} /></div>
+            <p className="animate-in-5" style={{fontFamily:"'Sarabun',sans-serif",fontSize:'0.7rem',color:'var(--text-secondary)',marginTop:'0.6rem',fontStyle:'italic',marginBottom:'1.5rem'}}>
+              If you'd like to follow me — it's majorly appreciated!
+            </p>
+            <div className="animate-in-5" style={{marginBottom:'2.5rem'}}><Toggle /></div>
           </div>
         </div>
       </div>
     );
   }
 
-  // ═══ DESIGNER MODE ═══
+  // ═══════════════════════════════════════════
+  // DESIGNER MODE
+  // ═══════════════════════════════════════════
   return (
-    <div data-theme="dark" style={{minHeight:'100vh',background:'var(--bg)',position:'relative'}}>
+    <div data-theme="dark" style={{minHeight:'100vh',background:'var(--bg)'}}>
 
-      {/* DESKTOP DESIGNER */}
-      <div className="ld-desk" style={{
-        minHeight:'100vh',flexDirection:'column',
-      }}>
-        {/* Top nav bar */}
+      {/* ──── DESKTOP ──── */}
+      <div className="ld-desk" style={{minHeight:'100vh',flexDirection:'column'}}>
         <header style={{
           display:'flex',alignItems:'center',justifyContent:'space-between',
-          padding:'24px 48px',borderBottom:'1px solid var(--border)',
+          padding:'0 3rem',height:72,
+          background:'rgba(0,1,13,0.85)',
+          backdropFilter:'blur(20px)',WebkitBackdropFilter:'blur(20px)',
+          borderBottom:'1px solid var(--border)',
         }}>
-          <h1 style={{fontFamily:"'Playfair Display', serif",fontSize:28,fontWeight:800,color:'var(--text)',letterSpacing:'0.03em',lineHeight:1}}>I. AM. DESIGN.</h1>
-          <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:11,fontWeight:700,letterSpacing:'0.2em',textTransform:'uppercase',color:'#E74C3C'}}>Internal Use Only</p>
+          <span style={{fontFamily:"'Playfair Display',serif",fontSize:'1.5rem',fontWeight:700,color:'var(--text)',letterSpacing:'-0.02em'}}>
+            AMP<span style={{color:'var(--accent)'}}>.</span>
+          </span>
+          <p style={{fontFamily:"'Sarabun',sans-serif",fontSize:'0.65rem',fontWeight:700,letterSpacing:'0.2em',textTransform:'uppercase',color:'var(--error)'}}>Internal Use Only</p>
         </header>
 
-        {/* Split hero */}
         <div style={{
-          flex:1,display:'flex',alignItems:'center',
-          padding:'0 48px 48px',gap:48,maxWidth:1280,margin:'0 auto',width:'100%',
+          flex:1,display:'flex',flexDirection:'column',alignItems:'center',
+          justifyContent:'center',padding:'4rem 2rem 3rem',textAlign:'center',
+          maxWidth:1400,margin:'0 auto',width:'100%',
         }}>
-          {/* Left — content */}
-          <div className="animate-in" style={{flex:1,maxWidth:560}}>
-            <h2 style={{fontFamily:"'Playfair Display', serif",fontSize:48,fontWeight:700,color:'var(--text)',lineHeight:1.12,marginBottom:20}}>
-              Project<br />Metadata
-            </h2>
-            <p style={{fontSize:17,color:'var(--text-secondary)',lineHeight:1.65,maxWidth:420,marginBottom:36,textWrap:'balance'}}>
-              Your private process log, client notes, and honest reflections.
-            </p>
-            <div style={{display:'flex',gap:14,alignItems:'center',flexWrap:'wrap',marginBottom:16}}>
-              <button onClick={()=>onSelect('designer-fill')} style={{
-                padding:'16px 36px',borderRadius:100,background:'var(--accent)',border:'none',
-                color:'#ffffff',fontSize:15,fontWeight:600,cursor:'pointer',
-                fontFamily:"'Sarabun', sans-serif",transition:'all 0.25s ease',
-                boxShadow:'0 4px 20px rgba(145,99,191,0.25)',
-              }}
-              onMouseEnter={(e)=>{e.currentTarget.style.background='var(--accent-hover)';e.currentTarget.style.transform='translateY(-2px)';}}
-              onMouseLeave={(e)=>{e.currentTarget.style.background='var(--accent)';e.currentTarget.style.transform='translateY(0)';}}
-              >Fill in Online →</button>
-              <a href="/creative-brief-complete.pdf" download style={{
-                padding:'16px 36px',borderRadius:100,background:'transparent',
-                border:'2px solid var(--border)',color:'var(--text-secondary)',fontSize:15,fontWeight:600,
-                cursor:'pointer',fontFamily:"'Sarabun', sans-serif",textDecoration:'none',textAlign:'center',
-                transition:'border-color 0.25s',
-              }}
-              onMouseEnter={(e)=>e.currentTarget.style.borderColor='var(--accent)'}
-              onMouseLeave={(e)=>e.currentTarget.style.borderColor='var(--border)'}
-              >Download PDF</a>
-            </div>
-            <div style={{marginTop:24}}><Toggle /></div>
+          <h1 className="animate-in-2" style={{
+            fontFamily:"'Playfair Display',serif",
+            fontSize:'clamp(2.5rem, 5vw, 4rem)',fontWeight:700,
+            lineHeight:1.1,color:'var(--text)',marginBottom:'1.25rem',
+          }}>
+            Project <span style={{color:'var(--accent)',fontStyle:'italic'}}>Metadata</span>
+          </h1>
+          <p className="animate-in-3" style={{
+            fontSize:'1.1rem',color:'var(--text-secondary)',
+            maxWidth:460,lineHeight:1.7,marginBottom:'2.5rem',textWrap:'balance',
+          }}>
+            Your private process log, client notes, and honest reflections.
+          </p>
+          <div className="animate-in-4" style={{display:'flex',gap:'1rem',flexWrap:'wrap',justifyContent:'center',alignItems:'center',marginBottom:'1rem'}}>
+            <button onClick={()=>onSelect('designer-fill')} className="btn-pill btn-pill--primary">
+              Fill in Online →
+            </button>
+            <a href="/creative-brief-complete.pdf" download className="btn-pill btn-pill--outline">
+              Download PDF
+            </a>
           </div>
-
-          {/* Right — visual area */}
-          <div style={{flex:1,display:'flex',alignItems:'center',justifyContent:'center',position:'relative',overflow:'visible'}}>
-            <img 
-              src="/hero-image.png" 
-              alt="Portfolio hero image" 
-              style={{
-                width:'100%',
-                maxWidth:600,
-                height:'auto',
-                borderRadius:24,
-                objectFit:'cover',
-              }} 
-            />
-          </div>
+          <div className="animate-in-5" style={{marginTop:'1.5rem'}}><Toggle /></div>
         </div>
       </div>
 
-      {/* MOBILE DESIGNER */}
-      <div className="ld-mob" style={{minHeight:'100vh',flexDirection:'column',padding:0,alignItems:'center'}}>
-        <header style={{padding:'24px 20px 0',textAlign:'center',width:'100%'}}>
-          <h1 style={{fontFamily:"'Playfair Display', serif",fontSize:34,fontWeight:800,letterSpacing:'0.04em',color:'var(--text)',lineHeight:1,marginBottom:6}}>I. AM. DESIGN.</h1>
-          <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:10,fontWeight:700,letterSpacing:'0.2em',textTransform:'uppercase',color:'#E74C3C',marginBottom:14}}>Internal Use Only</p>
-          <a href="mailto:AshleyPickett46@Gmail.com" style={{
-            display:'inline-block',fontFamily:"'Sarabun', sans-serif",fontSize:12,fontWeight:600,
-            color:'var(--text-on-accent)',textDecoration:'none',
-            padding:'10px 22px',borderRadius:100,background:'var(--accent)',
-            transition:'background 0.2s ease',
-          }}
-          onMouseEnter={(e)=>e.currentTarget.style.background='var(--accent-hover)'}
-          onMouseLeave={(e)=>e.currentTarget.style.background='var(--accent)'}
-          >Contact</a>
+      {/* ──── MOBILE ──── */}
+      <div className="ld-mob" style={{minHeight:'100vh',flexDirection:'column',alignItems:'center'}}>
+        <header style={{
+          display:'flex',alignItems:'center',justifyContent:'space-between',
+          padding:'0 1.25rem',height:64,width:'100%',
+          borderBottom:'1px solid var(--border)',
+        }}>
+          <span style={{fontFamily:"'Playfair Display',serif",fontSize:'1.3rem',fontWeight:700,color:'var(--text)',letterSpacing:'-0.02em'}}>
+            AMP<span style={{color:'var(--accent)'}}>.</span>
+          </span>
+          <p style={{fontFamily:"'Sarabun',sans-serif",fontSize:'0.6rem',fontWeight:700,letterSpacing:'0.15em',textTransform:'uppercase',color:'var(--error)'}}>Internal Only</p>
         </header>
-        <img src="/hero-image.png" alt="Portfolio hero image" style={{margin:'20px auto 0',width:'calc(100% - 40px)',maxWidth:400,borderRadius:14,objectFit:'cover'}} />
-        <div className="animate-in" style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',padding:'28px 24px 0',textAlign:'center',width:'100%'}}>
-          <h2 style={{fontFamily:"'Playfair Display', serif",fontSize:28,fontWeight:600,color:'var(--text)',marginBottom:10}}>Project Metadata</h2>
-          <p style={{fontSize:14,color:'var(--text-secondary)',marginBottom:28,lineHeight:1.6,maxWidth:320,textWrap:'balance'}}>
+
+        <div style={{
+          flex:1,display:'flex',flexDirection:'column',alignItems:'center',
+          padding:'2.5rem 1.5rem 0',textAlign:'center',width:'100%',
+        }}>
+          <h1 className="animate-in-2" style={{
+            fontFamily:"'Playfair Display',serif",
+            fontSize:'clamp(2rem, 8vw, 2.8rem)',fontWeight:700,
+            lineHeight:1.1,color:'var(--text)',marginBottom:'0.75rem',
+          }}>
+            Project <span style={{color:'var(--accent)',fontStyle:'italic'}}>Metadata</span>
+          </h1>
+          <p className="animate-in-3" style={{
+            fontSize:'0.95rem',color:'var(--text-secondary)',
+            maxWidth:320,lineHeight:1.65,marginBottom:'2rem',textWrap:'balance',
+          }}>
             Your private process log, client notes, and honest reflections.
           </p>
-          <div style={{display:'flex',flexDirection:'column',gap:12,width:'100%',maxWidth:320}}>
-            <button onClick={()=>onSelect('designer-fill')} style={{
-              padding:'18px 24px',borderRadius:12,background:'var(--accent)',border:'none',
-              color:'#ffffff',fontSize:16,fontWeight:600,cursor:'pointer',fontFamily:"'Sarabun', sans-serif",
-            }}>Fill in Online</button>
-            <a href="/creative-brief-complete.pdf" download style={{
-              padding:'18px 24px',borderRadius:12,background:'transparent',
-              border:'2px solid var(--border)',color:'var(--text-secondary)',fontSize:15,fontWeight:600,
-              textDecoration:'none',textAlign:'center',fontFamily:"'Sarabun', sans-serif",
-            }}>Download PDF</a>
+          <div className="animate-in-4" style={{display:'flex',flexDirection:'column',gap:12,width:'100%',maxWidth:320}}>
+            <button onClick={()=>onSelect('designer-fill')} className="btn-pill btn-pill--primary" style={{width:'100%',justifyContent:'center'}}>
+              Fill in Online →
+            </button>
+            <a href="/creative-brief-complete.pdf" download className="btn-pill btn-pill--outline" style={{width:'100%',justifyContent:'center'}}>
+              Download PDF
+            </a>
           </div>
-          <div style={{marginTop:28,marginBottom:40}}><Toggle /></div>
+          <div className="animate-in-5" style={{marginTop:'2rem',marginBottom:'2.5rem'}}><Toggle /></div>
         </div>
       </div>
     </div>
