@@ -33,19 +33,26 @@ function Landing({ onSelect }) {
     </div>
   );
 
+  const socialLinks = [
+    { name: 'github', url: 'https://ampickettdesign.github.io/', label: 'G' },
+    { name: 'linkedin', url: '#', label: 'L' },
+    { name: 'instagram', url: '#', label: 'I' },
+    { name: 'pinterest', url: '#', label: 'P' },
+  ];
+
   const Socials = ({ size=42, bg='var(--border-light)', color='var(--text-helper)' }) => (
     <div style={{display:'flex',gap:14,justifyContent:'center'}}>
-      {['dribbble','behance','instagram','linkedin'].map((s)=>(
-        <div key={s} style={{
+      {socialLinks.map((s)=>(
+        <a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer" style={{
           width:size,height:size,borderRadius:'50%',background:bg,
           display:'flex',alignItems:'center',justifyContent:'center',
           cursor:'pointer',transition:'all 0.2s',
           fontSize:11,color,fontWeight:700,textTransform:'uppercase',
-          fontFamily:"'Sarabun', sans-serif",
+          fontFamily:"'Sarabun', sans-serif",textDecoration:'none',
         }}
         onMouseEnter={(e)=>{e.currentTarget.style.background='var(--accent)';e.currentTarget.style.color='#ffffff';}}
         onMouseLeave={(e)=>{e.currentTarget.style.background=bg;e.currentTarget.style.color=color;}}
-        title={s}>{s[0].toUpperCase()}</div>
+        title={s.name}>{s.label}</a>
       ))}
     </div>
   );
