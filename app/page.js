@@ -327,7 +327,12 @@ function BriefForm({ sections, version, accentColor, isDark, onSubmit, onBack, i
   const [step, setStep] = useState(0);
   const [data, setData] = useState({});
   const contentRef = useRef(null);
-  const section = sections[step];
+
+  // Safety: clamp step to valid range
+  const safeStep = Math.max(0, Math.min(step, sections.length - 1));
+  if (safeStep !== step) setStep(safeStep);
+
+  const section = sections[safeStep];
 
   useEffect(() => {
     contentRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
@@ -563,6 +568,7 @@ export default function Home() {
   const [clientVersion, setClientVersion] = useState(null);
   const [phase, setPhase] = useState(null); // 'brief' | 'deepdive' | 'done'
   const [combinedData, setCombinedData] = useState({});
+  const [deepDiveCompleted, setDeepDiveCompleted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
@@ -589,6 +595,7 @@ export default function Home() {
     setClientVersion(null);
     setPhase(null);
     setCombinedData({});
+    setDeepDiveCompleted(false);
     setSubmitted(false);
   };
 
@@ -612,6 +619,7 @@ export default function Home() {
     if (phase === 'fill') {
       return (
         <BriefForm
+          key="private"
           sections={PRIVATE_META}
           version="private"
           accentColor="#7F63C1"
@@ -646,6 +654,7 @@ export default function Home() {
     if (phase === 'deepdive-before') {
       return (
         <BriefForm
+          key="deepdive-before"
           sections={VERSION_C}
           version="c"
           accentColor="#00A0C7"
@@ -655,6 +664,7 @@ export default function Home() {
           onBack={() => setPhase('ask-deep')}
           onSubmit={(data) => {
             setCombinedData((prev) => ({ ...prev, ...data }));
+            setDeepDiveCompleted(true);
             setPhase('brief');
           }}
         />
@@ -671,6 +681,7 @@ export default function Home() {
 
       return (
         <BriefForm
+          key={`brief-${clientVersion}`}
           sections={sections}
           version={clientVersion}
           accentColor={color}
@@ -691,18 +702,25 @@ export default function Home() {
     // Deep dive AFTER brief
     if (phase === 'deepdive-after') {
       // If they already did deep dive before brief (Version A), skip to submit
-      const alreadyDid = Object.keys(combinedData).some((k) => k.startsWith('c_'));
+      const alreadyDid = deepDiveCompleted;
       if (alreadyDid) {
-        // Submit everything
-        (async () => {
-          await submit(clientVersion, combinedData);
-          setSubmitted(true);
-        })();
-        return null;
+        // Transition to a submitting phase instead of calling async in render
+        if (!submitting && !submitted) {
+          submit(clientVersion, combinedData).then(() => setSubmitted(true));
+        }
+        return (
+          <div style={{
+            minHeight: '100vh', display: 'flex', alignItems: 'center',
+            justifyContent: 'center', background: 'var(--bg)',
+          }}>
+            <p style={{ color: 'var(--text-secondary)', fontSize: 16 }}>Submitting your brief…</p>
+          </div>
+        );
       }
 
       return (
         <BriefForm
+          key="deepdive-after"
           sections={VERSION_C}
           version="c"
           accentColor="#00A0C7"
