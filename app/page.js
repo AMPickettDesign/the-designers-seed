@@ -92,7 +92,7 @@ function Landing({ onSelect }) {
               <h2 style={{fontFamily:"'Playfair Display', serif",fontSize:52,fontWeight:700,color:'var(--text)',lineHeight:1.1,letterSpacing:'-0.02em',marginBottom:20}}>
                 Let's Build<br />Something<br /><span style={{color:'var(--accent)'}}>Beautiful Together</span>
               </h2>
-              <p style={{fontFamily:"'Nunito Sans', sans-serif",fontSize:17,color:'var(--text-secondary)',lineHeight:1.7,maxWidth:440,marginBottom:36}}>
+              <p style={{fontFamily:"'Nunito Sans', sans-serif",fontSize:17,color:'var(--text-secondary)',lineHeight:1.7,maxWidth:440,marginBottom:36,textWrap:'balance'}}>
                 Thanks for choosing me for your project. When you're ready, hit the button below to start the questionnaire.
               </p>
               <div style={{display:'flex',gap:14,alignItems:'center',flexWrap:'wrap',marginBottom:16}}>
@@ -145,7 +145,7 @@ function Landing({ onSelect }) {
           <div style={{margin:'20px auto 0',width:'calc(100% - 40px)',maxWidth:400,borderRadius:14,overflow:'hidden',background:'var(--border-light)',aspectRatio:'16 / 9'}} />
           <div className="animate-in" style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',padding:'28px 24px 0',textAlign:'center',width:'100%'}}>
             <h2 style={{fontFamily:"'Playfair Display', serif",fontSize:30,fontWeight:600,color:'var(--text)',marginBottom:10}}>Welcome</h2>
-            <p style={{fontSize:15,color:'var(--text-secondary)',maxWidth:340,lineHeight:1.65,marginBottom:24}}>
+            <p style={{fontSize:15,color:'var(--text-secondary)',maxWidth:340,lineHeight:1.65,marginBottom:24,textWrap:'balance'}}>
               Thanks for choosing me for your project! When you're ready, hit the button below to start the questionnaire.
             </p>
             <span style={{display:'block',fontSize:26,color:'var(--border)',marginBottom:20,lineHeight:1}} aria-hidden="true">↓</span>
@@ -196,7 +196,7 @@ function Landing({ onSelect }) {
             <h2 style={{fontFamily:"'Playfair Display', serif",fontSize:48,fontWeight:700,color:'var(--text)',lineHeight:1.12,marginBottom:20}}>
               Project<br />Metadata
             </h2>
-            <p style={{fontSize:17,color:'var(--text-secondary)',lineHeight:1.65,maxWidth:420,marginBottom:36}}>
+            <p style={{fontSize:17,color:'var(--text-secondary)',lineHeight:1.65,maxWidth:420,marginBottom:36,textWrap:'balance'}}>
               Your private process log, client notes, and honest reflections.
             </p>
             <div style={{display:'flex',gap:14,alignItems:'center',flexWrap:'wrap',marginBottom:16}}>
@@ -254,7 +254,7 @@ function Landing({ onSelect }) {
         <div style={{margin:'20px auto 0',width:'calc(100% - 40px)',maxWidth:400,borderRadius:14,overflow:'hidden',background:'var(--card)',aspectRatio:'16 / 9'}} />
         <div className="animate-in" style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',padding:'28px 24px 0',textAlign:'center',width:'100%'}}>
           <h2 style={{fontFamily:"'Playfair Display', serif",fontSize:28,fontWeight:600,color:'var(--text)',marginBottom:10}}>Project Metadata</h2>
-          <p style={{fontSize:14,color:'var(--text-secondary)',marginBottom:28,lineHeight:1.6,maxWidth:320}}>
+          <p style={{fontSize:14,color:'var(--text-secondary)',marginBottom:28,lineHeight:1.6,maxWidth:320,textWrap:'balance'}}>
             Your private process log, client notes, and honest reflections.
           </p>
           <div style={{display:'flex',flexDirection:'column',gap:12,width:'100%',maxWidth:320}}>
