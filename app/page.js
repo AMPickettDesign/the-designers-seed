@@ -57,43 +57,73 @@ function Landing({ onSelect }) {
 
         {/* DESKTOP CLIENT */}
         <div className="ld-desk" style={{
-          minHeight:'100vh',flexDirection:'column',alignItems:'center',
-          justifyContent:'center',padding:'60px 60px 100px',position:'relative',overflow:'hidden',
+          minHeight:'100vh',flexDirection:'column',
         }}>
-          {/* Floating accents */}
-          <div style={{position:'absolute',top:80,left:60,width:48,height:48,borderRadius:14,border:'2px solid var(--border-light)',opacity:0.5,transform:'rotate(12deg)'}} />
-          <div style={{position:'absolute',top:140,right:100,width:10,height:10,borderRadius:'50%',background:'var(--accent)',opacity:0.18}} />
-          <div style={{position:'absolute',bottom:200,left:120,width:8,height:8,borderRadius:'50%',background:'var(--teal)',opacity:0.2}} />
-          <div style={{position:'absolute',top:200,right:180,width:36,height:36,borderRadius:10,border:'2px solid var(--accent-soft)',opacity:0.4,transform:'rotate(-8deg)'}} />
-
-          <header style={{position:'absolute',top:0,left:0,right:0,display:'flex',alignItems:'center',justifyContent:'space-between',padding:'28px 48px'}}>
-            <h1 style={{fontFamily:"'Playfair Display', serif",fontSize:22,fontWeight:800,color:'var(--text)',letterSpacing:'0.03em',lineHeight:1}}>I. AM. DESIGN.</h1>
-            <a href="mailto:AshleyPickett46@Gmail.com" style={{fontFamily:"'Sarabun', sans-serif",fontSize:13,fontWeight:600,color:'var(--text-helper)',textDecoration:'none',padding:'8px 16px',borderRadius:8}}>Contact</a>
+          {/* Top nav bar */}
+          <header style={{
+            display:'flex',alignItems:'center',justifyContent:'space-between',
+            padding:'24px 48px',borderBottom:'1px solid var(--border-light)',
+          }}>
+            <h1 style={{fontFamily:"'Playfair Display', serif",fontSize:28,fontWeight:800,color:'var(--text)',letterSpacing:'0.03em',lineHeight:1}}>I. AM. DESIGN.</h1>
+            <div style={{display:'flex',alignItems:'center',gap:24}}>
+              <Socials size={34} />
+              <a href="mailto:AshleyPickett46@Gmail.com" style={{
+                fontFamily:"'Sarabun', sans-serif",fontSize:14,fontWeight:600,
+                color:'var(--text-on-accent)',textDecoration:'none',
+                padding:'10px 24px',borderRadius:100,background:'var(--accent)',
+                transition:'background 0.2s ease',
+              }}
+              onMouseEnter={(e)=>e.currentTarget.style.background='var(--accent-hover)'}
+              onMouseLeave={(e)=>e.currentTarget.style.background='var(--accent)'}
+              >Contact</a>
+            </div>
           </header>
 
-          <div className="animate-in" style={{textAlign:'center',maxWidth:680,position:'relative',zIndex:1}}>
-            <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:13,fontWeight:600,letterSpacing:'0.12em',textTransform:'uppercase',color:'var(--text-helper)',marginBottom:20}}>
-              Ashley M. Pickett · UI/UX & Graphic Designer
-            </p>
-            <h2 style={{fontFamily:"'Playfair Display', serif",fontSize:56,fontWeight:700,color:'var(--text)',lineHeight:1.12,letterSpacing:'-0.02em',marginBottom:20}}>
-              Let's Build Something<br /><span style={{color:'var(--accent)'}}>Beautiful Together</span>
-            </h2>
-            <p style={{fontFamily:"'Nunito Sans', sans-serif",fontSize:18,color:'var(--text-secondary)',lineHeight:1.7,maxWidth:480,margin:'0 auto 40px'}}>
-              Thanks for choosing me for your project. When you're ready, hit the button below to start the questionnaire.
-            </p>
-            <button onClick={()=>onSelect('client')} style={{
-              padding:'18px 44px',borderRadius:12,background:'var(--accent)',border:'none',
-              color:'#ffffff',fontSize:16,fontWeight:600,cursor:'pointer',
-              transition:'all 0.25s ease',fontFamily:"'Sarabun', sans-serif",
-              boxShadow:'0 4px 20px rgba(93,44,115,0.2)',marginBottom:24,
-            }}
-            onMouseEnter={(e)=>{e.currentTarget.style.background='var(--accent-hover)';e.currentTarget.style.transform='translateY(-2px)';e.currentTarget.style.boxShadow='0 8px 28px rgba(93,44,115,0.3)';}}
-            onMouseLeave={(e)=>{e.currentTarget.style.background='var(--accent)';e.currentTarget.style.transform='translateY(0)';e.currentTarget.style.boxShadow='0 4px 20px rgba(93,44,115,0.2)';}}
-            >I'm a Client →</button>
-            <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:13,color:'var(--text-helper)',marginBottom:40}}>This is a No-Obligation Questionnaire</p>
-            <Socials />
-            <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:12,color:'var(--text-secondary)',marginTop:12,fontStyle:'italic'}}>If you'd like to follow me — it's majorly appreciated!</p>
-            <div style={{marginTop:32}}><Toggle /></div>
+          {/* Split hero */}
+          <div style={{
+            flex:1,display:'flex',alignItems:'center',
+            padding:'0 48px 48px',gap:48,maxWidth:1280,margin:'0 auto',width:'100%',
+          }}>
+            {/* Left — content */}
+            <div className="animate-in" style={{flex:1,maxWidth:560}}>
+              <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:13,fontWeight:600,letterSpacing:'0.12em',textTransform:'uppercase',color:'var(--text-helper)',marginBottom:16}}>
+                Ashley M. Pickett · UI/UX & Graphic Designer
+              </p>
+              <h2 style={{fontFamily:"'Playfair Display', serif",fontSize:52,fontWeight:700,color:'var(--text)',lineHeight:1.1,letterSpacing:'-0.02em',marginBottom:20}}>
+                Let's Build<br />Something<br /><span style={{color:'var(--accent)'}}>Beautiful Together</span>
+              </h2>
+              <p style={{fontFamily:"'Nunito Sans', sans-serif",fontSize:17,color:'var(--text-secondary)',lineHeight:1.7,maxWidth:440,marginBottom:36}}>
+                Thanks for choosing me for your project. When you're ready, hit the button below to start the questionnaire.
+              </p>
+              <div style={{display:'flex',gap:14,alignItems:'center',flexWrap:'wrap',marginBottom:16}}>
+                <button onClick={()=>onSelect('client')} style={{
+                  padding:'16px 36px',borderRadius:100,background:'var(--accent)',border:'none',
+                  color:'#ffffff',fontSize:15,fontWeight:600,cursor:'pointer',
+                  transition:'all 0.25s ease',fontFamily:"'Sarabun', sans-serif",
+                  boxShadow:'0 4px 20px rgba(93,44,115,0.2)',
+                }}
+                onMouseEnter={(e)=>{e.currentTarget.style.background='var(--accent-hover)';e.currentTarget.style.transform='translateY(-2px)';e.currentTarget.style.boxShadow='0 8px 28px rgba(93,44,115,0.3)';}}
+                onMouseLeave={(e)=>{e.currentTarget.style.background='var(--accent)';e.currentTarget.style.transform='translateY(0)';e.currentTarget.style.boxShadow='0 4px 20px rgba(93,44,115,0.2)';}}
+                >I'm a Client →</button>
+                <Toggle />
+              </div>
+              <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:13,color:'var(--text-helper)'}}>This is a No-Obligation Questionnaire</p>
+            </div>
+
+            {/* Right — visual area */}
+            <div style={{flex:1,display:'flex',alignItems:'center',justifyContent:'center',position:'relative'}}>
+              <div style={{
+                width:'100%',maxWidth:480,aspectRatio:'4 / 3',borderRadius:24,
+                background:'linear-gradient(135deg, var(--border-light) 0%, var(--card) 100%)',
+                border:'1px solid var(--border-light)',
+                display:'flex',alignItems:'center',justifyContent:'center',
+                overflow:'hidden',position:'relative',
+              }}>
+                <div style={{position:'absolute',top:'-20%',right:'-10%',width:'60%',height:'60%',borderRadius:'50%',background:'radial-gradient(circle,rgba(93,44,115,0.08) 0%,transparent 70%)',pointerEvents:'none'}} />
+                <div style={{position:'absolute',bottom:'-15%',left:'-5%',width:'50%',height:'50%',borderRadius:'50%',background:'radial-gradient(circle,rgba(3,120,166,0.06) 0%,transparent 70%)',pointerEvents:'none'}} />
+                <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:13,color:'var(--text-helper)',letterSpacing:'0.04em'}}>Portfolio preview</p>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -140,40 +170,64 @@ function Landing({ onSelect }) {
 
       {/* DESKTOP DESIGNER */}
       <div className="ld-desk" style={{
-        minHeight:'100vh',flexDirection:'column',alignItems:'center',justifyContent:'center',
-        padding:'60px 60px 100px',position:'relative',overflow:'hidden',
+        minHeight:'100vh',flexDirection:'column',
       }}>
-        <div style={{position:'absolute',top:'30%',left:'50%',transform:'translate(-50%,-50%)',width:500,height:500,borderRadius:'50%',background:'radial-gradient(circle,rgba(145,99,191,0.06) 0%,transparent 70%)',pointerEvents:'none'}} />
-        <header style={{position:'absolute',top:0,left:0,right:0,display:'flex',alignItems:'center',justifyContent:'space-between',padding:'28px 48px'}}>
-          <h1 style={{fontFamily:"'Playfair Display', serif",fontSize:22,fontWeight:800,color:'var(--text)',letterSpacing:'0.03em',lineHeight:1}}>I. AM. DESIGN.</h1>
-          <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:10,fontWeight:700,letterSpacing:'0.2em',textTransform:'uppercase',color:'#E74C3C'}}>Internal Use Only</p>
+        {/* Top nav bar */}
+        <header style={{
+          display:'flex',alignItems:'center',justifyContent:'space-between',
+          padding:'24px 48px',borderBottom:'1px solid var(--border)',
+        }}>
+          <h1 style={{fontFamily:"'Playfair Display', serif",fontSize:28,fontWeight:800,color:'var(--text)',letterSpacing:'0.03em',lineHeight:1}}>I. AM. DESIGN.</h1>
+          <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:11,fontWeight:700,letterSpacing:'0.2em',textTransform:'uppercase',color:'#E74C3C'}}>Internal Use Only</p>
         </header>
-        <div className="animate-in" style={{textAlign:'center',maxWidth:520,position:'relative',zIndex:1}}>
-          <h2 style={{fontFamily:"'Playfair Display', serif",fontSize:48,fontWeight:700,color:'var(--text)',lineHeight:1.15,marginBottom:16}}>Project Metadata</h2>
-          <p style={{fontSize:17,color:'var(--text-secondary)',lineHeight:1.65,maxWidth:400,margin:'0 auto 44px'}}>
-            Your private process log, client notes, and honest reflections.
-          </p>
-          <div style={{display:'flex',gap:16,justifyContent:'center',flexWrap:'wrap'}}>
-            <button onClick={()=>onSelect('designer-fill')} style={{
-              padding:'18px 40px',borderRadius:12,background:'var(--accent)',border:'none',
-              color:'#ffffff',fontSize:16,fontWeight:600,cursor:'pointer',
-              fontFamily:"'Sarabun', sans-serif",transition:'all 0.25s ease',
-              boxShadow:'0 4px 20px rgba(145,99,191,0.25)',
-            }}
-            onMouseEnter={(e)=>{e.currentTarget.style.background='var(--accent-hover)';e.currentTarget.style.transform='translateY(-2px)';}}
-            onMouseLeave={(e)=>{e.currentTarget.style.background='var(--accent)';e.currentTarget.style.transform='translateY(0)';}}
-            >Fill in Online →</button>
-            <a href="/creative-brief-complete.pdf" download style={{
-              padding:'18px 40px',borderRadius:12,background:'transparent',
-              border:'2px solid var(--border)',color:'var(--text-secondary)',fontSize:16,fontWeight:600,
-              cursor:'pointer',fontFamily:"'Sarabun', sans-serif",textDecoration:'none',textAlign:'center',
-              transition:'border-color 0.25s',
-            }}
-            onMouseEnter={(e)=>e.currentTarget.style.borderColor='var(--accent)'}
-            onMouseLeave={(e)=>e.currentTarget.style.borderColor='var(--border)'}
-            >Download PDF</a>
+
+        {/* Split hero */}
+        <div style={{
+          flex:1,display:'flex',alignItems:'center',
+          padding:'0 48px 48px',gap:48,maxWidth:1280,margin:'0 auto',width:'100%',
+        }}>
+          {/* Left — content */}
+          <div className="animate-in" style={{flex:1,maxWidth:560}}>
+            <h2 style={{fontFamily:"'Playfair Display', serif",fontSize:48,fontWeight:700,color:'var(--text)',lineHeight:1.12,marginBottom:20}}>
+              Project<br />Metadata
+            </h2>
+            <p style={{fontSize:17,color:'var(--text-secondary)',lineHeight:1.65,maxWidth:420,marginBottom:36}}>
+              Your private process log, client notes, and honest reflections.
+            </p>
+            <div style={{display:'flex',gap:14,alignItems:'center',flexWrap:'wrap',marginBottom:16}}>
+              <button onClick={()=>onSelect('designer-fill')} style={{
+                padding:'16px 36px',borderRadius:100,background:'var(--accent)',border:'none',
+                color:'#ffffff',fontSize:15,fontWeight:600,cursor:'pointer',
+                fontFamily:"'Sarabun', sans-serif",transition:'all 0.25s ease',
+                boxShadow:'0 4px 20px rgba(145,99,191,0.25)',
+              }}
+              onMouseEnter={(e)=>{e.currentTarget.style.background='var(--accent-hover)';e.currentTarget.style.transform='translateY(-2px)';}}
+              onMouseLeave={(e)=>{e.currentTarget.style.background='var(--accent)';e.currentTarget.style.transform='translateY(0)';}}
+              >Fill in Online →</button>
+              <a href="/creative-brief-complete.pdf" download style={{
+                padding:'16px 36px',borderRadius:100,background:'transparent',
+                border:'2px solid var(--border)',color:'var(--text-secondary)',fontSize:15,fontWeight:600,
+                cursor:'pointer',fontFamily:"'Sarabun', sans-serif",textDecoration:'none',textAlign:'center',
+                transition:'border-color 0.25s',
+              }}
+              onMouseEnter={(e)=>e.currentTarget.style.borderColor='var(--accent)'}
+              onMouseLeave={(e)=>e.currentTarget.style.borderColor='var(--border)'}
+              >Download PDF</a>
+            </div>
+            <div style={{marginTop:24}}><Toggle /></div>
           </div>
-          <div style={{marginTop:36}}><Toggle /></div>
+
+          {/* Right — visual area */}
+          <div style={{flex:1,display:'flex',alignItems:'center',justifyContent:'center'}}>
+            <div style={{
+              width:'100%',maxWidth:480,aspectRatio:'4 / 3',borderRadius:24,
+              background:'linear-gradient(135deg, var(--border) 0%, var(--card) 100%)',
+              border:'1px solid var(--border)',
+              display:'flex',alignItems:'center',justifyContent:'center',
+            }}>
+              <p style={{fontFamily:"'Sarabun', sans-serif",fontSize:13,color:'var(--text-secondary)',letterSpacing:'0.04em'}}>Project workspace</p>
+            </div>
+          </div>
         </div>
       </div>
 
