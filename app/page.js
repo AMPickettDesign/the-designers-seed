@@ -472,7 +472,7 @@ function BriefForm({ sections, version, accentColor, isDark, onSubmit, onBack, i
             fontFamily: "'Playfair Display', serif", fontSize: 24,
             fontWeight: 600, color: '#ffffff', marginBottom: 14,
           }}>
-            {isDark ? 'Project Metadata' : version === 'a' ? 'Client Project Brief' : version === 'b' ? "Let's Figure It Out Together" : 'Detailed Project Guide'}
+            {isDark ? 'Project Metadata' : version === 'a' ? 'Client Design Brief' : version === 'b' ? "Let's Figure It Out Together" : 'Detailed Project Guide'}
           </h1>
           <ProgressBar
             current={filledCount}

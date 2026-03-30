@@ -118,13 +118,13 @@ export async function POST(request) {
               ${fields}
             </table>
             <div style="padding:16px 32px;background:#f5f3f8;border-radius:0 0 12px 12px;border:1px solid #e8e3f0;border-top:none;">
-              <p style="color:#655a78;font-size:13px;margin:0;">Ashley M. Pickett · Project Brief System</p>
+              <p style="color:#655a78;font-size:13px;margin:0;">Ashley M. Pickett · The Designer's Seed</p>
             </div>
           </div>
         `;
 
         await transporter.sendMail({
-          from: `"Project Brief" <${process.env.SMTP_EMAIL}>`,
+          from: `"The Designer's Seed" <${process.env.SMTP_EMAIL}>`,
           to: process.env.NOTIFY_EMAIL,
           subject,
           html,
