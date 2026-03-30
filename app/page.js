@@ -6,79 +6,245 @@ import { FormField, SectionHeader, ProgressBar } from '../components/FormFields'
 
 // ─── LANDING SCREEN ─────────────────────────────────────────
 function Landing({ onSelect }) {
+  const [mode, setMode] = useState('client'); // 'client' | 'designer'
+  const isDesigner = mode === 'designer';
+
   return (
-    <div style={{
-      minHeight: '100vh', display: 'flex', flexDirection: 'column',
-      alignItems: 'center', justifyContent: 'center', padding: '40px 20px',
-      background: 'var(--bg)',
-    }}>
-      <div className="animate-in" style={{ textAlign: 'center', maxWidth: 560 }}>
-        <p style={{
-          fontSize: 11, fontWeight: 600, letterSpacing: '0.15em',
-          textTransform: 'uppercase', color: 'var(--text-helper)', marginBottom: 12,
-        }}>
-          Ashley M. Pickett
-        </p>
+    <div
+      data-theme={isDesigner ? 'dark' : undefined}
+      style={{
+        minHeight: '100vh', display: 'flex', flexDirection: 'column',
+        background: isDesigner ? '#0d0a12' : '#faf9fc',
+        transition: 'background 0.4s ease',
+      }}
+    >
+      {/* ── Top branding bar ── */}
+      <header style={{
+        padding: '28px 24px 0', textAlign: 'center',
+      }}>
         <h1 style={{
-          fontFamily: "'Playfair Display', serif", fontSize: 42,
-          fontWeight: 600, color: 'var(--text)', marginBottom: 12,
-          letterSpacing: '-0.02em', lineHeight: 1.15,
+          fontFamily: "'Playfair Display', serif",
+          fontSize: 38, fontWeight: 800, letterSpacing: '0.04em',
+          color: isDesigner ? '#f0ecf5' : '#1a1025',
+          lineHeight: 1, marginBottom: 10,
+          transition: 'color 0.4s ease',
         }}>
-          Project Brief
+          I. AM. DESIGN.
         </h1>
         <p style={{
-          fontSize: 17, color: 'var(--text-secondary)', marginBottom: 48,
-          lineHeight: 1.6,
+          fontSize: 13, color: isDesigner ? '#8a7ea0' : '#655a78',
+          lineHeight: 1.5, transition: 'color 0.4s ease',
         }}>
-          A guided workbook to plan your website, app, or brand.
-          <br />Pick who you are to get started.
+          Ashley M. Pickett · UI/UX & Graphic Designer
         </p>
-
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 16, maxWidth: 400, margin: '0 auto' }}>
-          <button
-            onClick={() => onSelect('client')}
-            style={{
-              padding: '20px 32px', borderRadius: 14,
-              background: '#6801C2', border: 'none',
-              color: '#ffffff', fontSize: 17, fontWeight: 600,
-              cursor: 'pointer', transition: 'all 0.2s',
-              fontFamily: 'inherit', textAlign: 'left',
-              display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-            }}
-            onMouseEnter={(e) => e.currentTarget.style.background = '#5501a0'}
-            onMouseLeave={(e) => e.currentTarget.style.background = '#6801C2'}
-          >
-            <div>
-              <span style={{ display: 'block' }}>I'm a Client</span>
-              <span style={{ fontSize: 13, fontWeight: 400, opacity: 0.8 }}>
-                Let's plan your project together
-              </span>
-            </div>
-            <span style={{ fontSize: 22 }} aria-hidden="true">→</span>
-          </button>
-
-          <button
-            onClick={() => onSelect('designer')}
-            style={{
-              padding: '20px 32px', borderRadius: 14,
-              background: 'var(--card)', border: '2px solid var(--border)',
-              color: 'var(--text)', fontSize: 17, fontWeight: 600,
-              cursor: 'pointer', transition: 'all 0.2s',
-              fontFamily: 'inherit', textAlign: 'left',
-              display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-            }}
-            onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--accent)'}
-            onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--border)'}
-          >
-            <div>
-              <span style={{ display: 'block' }}>I'm the Designer</span>
-              <span style={{ fontSize: 13, fontWeight: 400, color: 'var(--text-helper)' }}>
-                Private project notes & metadata
-              </span>
-            </div>
-            <span style={{ fontSize: 22, color: 'var(--text-helper)' }} aria-hidden="true">→</span>
-          </button>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: 20, marginTop: 6 }}>
+          <a href="mailto:AshleyPickett46@Gmail.com" style={{
+            fontSize: 12, color: isDesigner ? '#7F63C1' : '#6801C2',
+            textDecoration: 'underline', textUnderlineOffset: 2,
+            transition: 'color 0.4s ease',
+          }}>
+            AshleyPickett46@Gmail.com
+          </a>
+          <span style={{
+            fontSize: 12, color: isDesigner ? '#8a7ea0' : '#655a78',
+            transition: 'color 0.4s ease',
+          }}>
+            (509) 609-6956
+          </span>
         </div>
+      </header>
+
+      {/* ── Hero area ── */}
+      <div style={{
+        margin: '24px 24px 0', borderRadius: 16, overflow: 'hidden',
+        background: isDesigner ? '#18141f' : '#e8e3f0',
+        aspectRatio: '16 / 9', maxHeight: 220,
+        transition: 'background 0.4s ease',
+      }} />
+
+      {/* ── Main content — switches between Client and Designer ── */}
+      <div className="animate-in" style={{
+        flex: 1, display: 'flex', flexDirection: 'column',
+        alignItems: 'center', padding: '32px 24px 120px',
+        textAlign: 'center',
+      }}>
+        {!isDesigner ? (
+          /* ─── CLIENT VIEW ─── */
+          <>
+            <h2 style={{
+              fontFamily: "'Playfair Display', serif", fontSize: 32,
+              fontWeight: 600, color: '#1a1025', marginBottom: 12,
+              letterSpacing: '-0.02em',
+            }}>
+              Welcome
+            </h2>
+            <p style={{
+              fontSize: 15, color: '#4a3d5c', maxWidth: 360,
+              lineHeight: 1.65, marginBottom: 28,
+            }}>
+              Thanks for choosing me for your project! When you're
+              ready, hit the button below to start the questionnaire.
+            </p>
+
+            <span style={{
+              display: 'block', fontSize: 28, color: '#655a78',
+              marginBottom: 24, lineHeight: 1,
+            }} aria-hidden="true">↓</span>
+
+            <button
+              onClick={() => onSelect('client')}
+              style={{
+                padding: '22px 48px', borderRadius: 14,
+                background: '#6801C2', border: 'none',
+                color: '#ffffff', fontSize: 22, fontWeight: 700,
+                cursor: 'pointer', transition: 'all 0.25s ease',
+                fontFamily: 'inherit', letterSpacing: '0.03em',
+                textTransform: 'uppercase', width: '100%', maxWidth: 360,
+                boxShadow: '0 4px 24px rgba(104, 1, 194, 0.25)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = '#5501a0';
+                e.currentTarget.style.transform = 'translateY(-1px)';
+                e.currentTarget.style.boxShadow = '0 6px 28px rgba(104, 1, 194, 0.35)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = '#6801C2';
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 4px 24px rgba(104, 1, 194, 0.25)';
+              }}
+            >
+              I'm a Client
+            </button>
+
+            <p style={{
+              fontSize: 12, color: '#655a78', marginTop: 14,
+              letterSpacing: '0.02em',
+            }}>
+              This is a No-Obligation Questionnaire
+            </p>
+
+            {/* Social icons placeholder */}
+            <div style={{
+              display: 'flex', gap: 16, marginTop: 28, justifyContent: 'center',
+            }}>
+              {['dribbble', 'behance', 'instagram', 'linkedin'].map((s) => (
+                <div key={s} style={{
+                  width: 40, height: 40, borderRadius: '50%',
+                  background: '#e8e3f0', display: 'flex',
+                  alignItems: 'center', justifyContent: 'center',
+                  cursor: 'pointer', transition: 'background 0.2s',
+                  fontSize: 11, color: '#655a78', fontWeight: 600,
+                  textTransform: 'uppercase', letterSpacing: '0.04em',
+                }}
+                  onMouseEnter={(e) => e.currentTarget.style.background = '#d8d0e4'}
+                  onMouseLeave={(e) => e.currentTarget.style.background = '#e8e3f0'}
+                  title={s}
+                >
+                  {s[0].toUpperCase()}
+                </div>
+              ))}
+            </div>
+
+            <p style={{
+              fontSize: 12, color: '#8a7ea0', marginTop: 14,
+              fontStyle: 'italic',
+            }}>
+              If you'd like to follow me — it's majorly appreciated!
+            </p>
+          </>
+        ) : (
+          /* ─── DESIGNER VIEW ─── */
+          <>
+            <p style={{
+              fontSize: 10, fontWeight: 700, letterSpacing: '0.2em',
+              textTransform: 'uppercase', color: '#ff4d4d', marginBottom: 16,
+              fontFamily: "'Space Mono', monospace",
+            }}>
+              Internal Use Only
+            </p>
+            <h2 style={{
+              fontFamily: "'Playfair Display', serif", fontSize: 30,
+              fontWeight: 600, color: '#f0ecf5', marginBottom: 12,
+            }}>
+              Project Metadata
+            </h2>
+            <p style={{
+              fontSize: 15, color: '#8a7ea0', marginBottom: 36,
+              lineHeight: 1.6, maxWidth: 380,
+            }}>
+              Your private process log, client notes, and honest reflections.
+            </p>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: '100%', maxWidth: 340 }}>
+              <button
+                onClick={() => onSelect('designer-fill')}
+                style={{
+                  padding: '18px 24px', borderRadius: 12,
+                  background: '#7F63C1', border: 'none',
+                  color: '#ffffff', fontSize: 16, fontWeight: 600,
+                  cursor: 'pointer', fontFamily: 'inherit',
+                  transition: 'background 0.2s',
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.background = '#9a80d8'}
+                onMouseLeave={(e) => e.currentTarget.style.background = '#7F63C1'}
+              >
+                Fill in online
+              </button>
+              <a
+                href="/creative-brief-complete.pdf"
+                download
+                style={{
+                  padding: '18px 24px', borderRadius: 12,
+                  background: 'transparent', border: '2px solid #2e2640',
+                  color: '#bab0ca', fontSize: 15, fontWeight: 600,
+                  cursor: 'pointer', fontFamily: "'DM Sans', sans-serif",
+                  textDecoration: 'none', textAlign: 'center',
+                  transition: 'border-color 0.2s',
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.borderColor = '#7F63C1'}
+                onMouseLeave={(e) => e.currentTarget.style.borderColor = '#2e2640'}
+              >
+                Download PDF instead
+              </a>
+            </div>
+          </>
+        )}
+      </div>
+
+      {/* ── Bottom toggle bar ── */}
+      <div style={{
+        position: 'fixed', bottom: 0, left: 0, right: 0,
+        display: 'flex', zIndex: 20,
+        background: isDesigner ? '#110e17' : '#ffffff',
+        borderTop: `1px solid ${isDesigner ? '#2e2640' : '#e8e3f0'}`,
+        transition: 'background 0.4s ease, border-color 0.4s ease',
+      }}>
+        <button
+          onClick={() => setMode('client')}
+          style={{
+            flex: 1, padding: '16px', border: 'none',
+            fontFamily: 'inherit', fontSize: 13, fontWeight: 700,
+            letterSpacing: '0.08em', textTransform: 'uppercase',
+            cursor: 'pointer', transition: 'all 0.3s ease',
+            background: !isDesigner ? '#1a1025' : 'transparent',
+            color: !isDesigner ? '#ffffff' : (isDesigner ? '#5a5a60' : '#655a78'),
+          }}
+        >
+          Client View
+        </button>
+        <button
+          onClick={() => setMode('designer')}
+          style={{
+            flex: 1, padding: '16px', border: 'none',
+            fontFamily: 'inherit', fontSize: 13, fontWeight: 700,
+            letterSpacing: '0.08em', textTransform: 'uppercase',
+            cursor: 'pointer', transition: 'all 0.3s ease',
+            background: isDesigner ? '#7F63C1' : 'transparent',
+            color: isDesigner ? '#ffffff' : '#655a78',
+          }}
+        >
+          Designer View
+        </button>
       </div>
     </div>
   );
@@ -246,81 +412,7 @@ function DeepDivePrompt({ onChoice }) {
   );
 }
 
-// ─── DESIGNER LANDING ────────────────────────────────────────
-function DesignerLanding({ onChoice }) {
-  return (
-    <div data-theme="dark" style={{
-      minHeight: '100vh', display: 'flex', flexDirection: 'column',
-      alignItems: 'center', justifyContent: 'center', padding: '40px 20px',
-      background: '#0d0a12',
-    }}>
-      <div className="animate-in" style={{ textAlign: 'center', maxWidth: 520 }}>
-        <p style={{
-          fontSize: 10, fontWeight: 700, letterSpacing: '0.2em',
-          textTransform: 'uppercase', color: '#ff4d4d', marginBottom: 16,
-          fontFamily: "'Space Mono', monospace",
-        }}>
-          Internal Use Only
-        </p>
-        <h2 style={{
-          fontFamily: "'Playfair Display', serif", fontSize: 32,
-          fontWeight: 600, color: '#f0ecf5', marginBottom: 12,
-        }}>
-          Project Metadata
-        </h2>
-        <p style={{
-          fontSize: 15, color: '#8a7ea0', marginBottom: 40,
-          lineHeight: 1.6,
-        }}>
-          Your private process log, client notes, and honest reflections.
-        </p>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 12, maxWidth: 360, margin: '0 auto' }}>
-          <button
-            onClick={() => onChoice('fill')}
-            style={{
-              padding: '16px 24px', borderRadius: 12,
-              background: '#7F63C1', border: 'none',
-              color: '#ffffff', fontSize: 15, fontWeight: 600,
-              cursor: 'pointer', fontFamily: 'inherit',
-              transition: 'background 0.2s',
-            }}
-            onMouseEnter={(e) => e.currentTarget.style.background = '#9a80d8'}
-            onMouseLeave={(e) => e.currentTarget.style.background = '#7F63C1'}
-          >
-            Fill in online
-          </button>
-          <a
-            href="/creative-brief-complete.pdf"
-            download
-            style={{
-              padding: '16px 24px', borderRadius: 12,
-              background: 'transparent', border: '2px solid #2e2640',
-              color: '#bab0ca', fontSize: 15, fontWeight: 600,
-              cursor: 'pointer', fontFamily: "'DM Sans', sans-serif",
-              textDecoration: 'none', textAlign: 'center',
-              transition: 'border-color 0.2s',
-            }}
-            onMouseEnter={(e) => e.currentTarget.style.borderColor = '#7F63C1'}
-            onMouseLeave={(e) => e.currentTarget.style.borderColor = '#2e2640'}
-          >
-            Download PDF instead
-          </a>
-        </div>
-        <button
-          onClick={() => window.location.reload()}
-          style={{
-            marginTop: 32, background: 'none', border: 'none',
-            color: '#5a5a60', fontSize: 14, cursor: 'pointer',
-            fontFamily: 'inherit', textDecoration: 'underline',
-            textUnderlineOffset: 3,
-          }}
-        >
-          ← Back
-        </button>
-      </div>
-    </div>
-  );
-}
+// ─── (Designer landing merged into Landing toggle) ──────────
 
 // ─── FORM ENGINE ─────────────────────────────────────────────
 function BriefForm({ sections, version, accentColor, isDark, onSubmit, onBack, introText, signoff }) {
@@ -609,31 +701,25 @@ export default function Home() {
     return <Landing onSelect={(role) => setScreen(role)} />;
   }
 
-  // === DESIGNER PATH ===
-  if (screen === 'designer') {
-    if (!phase) {
-      return <DesignerLanding onChoice={(c) => {
-        if (c === 'fill') { setClientVersion('private'); setPhase('fill'); }
-      }} />;
-    }
-    if (phase === 'fill') {
-      return (
-        <BriefForm
-          key="private"
-          sections={PRIVATE_META}
-          version="private"
-          accentColor="#7F63C1"
-          isDark={true}
-          introText="Be honest, be messy, this is yours. Not for client eyes."
-          signoff={true}
-          onBack={() => setPhase(null)}
-          onSubmit={async (data) => {
-            await submit('private', data);
-            setSubmitted(true);
-          }}
-        />
-      );
-    }
+  // === DESIGNER PATH (entered via toggle on landing) ===
+  if (screen === 'designer-fill') {
+    return (
+      <BriefForm
+        key="private"
+        sections={PRIVATE_META}
+        version="private"
+        accentColor="#7F63C1"
+        isDark={true}
+        introText="Be honest, be messy, this is yours. Not for client eyes."
+        signoff={true}
+        onBack={() => reset()}
+        onSubmit={async (data) => {
+          setClientVersion('private');
+          await submit('private', data);
+          setSubmitted(true);
+        }}
+      />
+    );
   }
 
   // === CLIENT PATH ===
