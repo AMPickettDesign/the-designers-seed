@@ -35,10 +35,10 @@ function Landing({ onSelect }) {
 
   // ── Social links ──
   const socialLinks = [
-    { name: 'github', url: 'https://ampickettdesign.github.io/', label: 'G' },
-    { name: 'linkedin', url: 'https://www.linkedin.com/in/ashley-pickett-37444394/', label: 'L' },
-    { name: 'instagram', url: 'https://www.instagram.com/ashdoesdesigns/', label: 'I' },
-    { name: 'pinterest', url: 'https://www.pinterest.com/TheAMPExperience/', label: 'P' },
+    { name: 'github', url: 'https://ampickettdesign.github.io/', icon: '/github-icon.png' },
+    { name: 'linkedin', url: 'https://www.linkedin.com/in/ashley-pickett-37444394/', icon: '/linkedin-icon.png' },
+    { name: 'instagram', url: 'https://www.instagram.com/ashdoesdesigns/', icon: '/briefcase-icon.png' },
+    { name: 'pinterest', url: 'https://www.pinterest.com/TheAMPExperience/', icon: '/pinterest-icon.png' },
   ];
 
   const Socials = ({ size=36, light=true }) => (
@@ -50,23 +50,21 @@ function Landing({ onSelect }) {
           border:light?'1px solid var(--border-light)':'1px solid rgba(255,255,255,0.1)',
           display:'flex',alignItems:'center',justifyContent:'center',
           cursor:'pointer',transition:'all 0.2s cubic-bezier(0.16,1,0.3,1)',
-          fontSize:11,color:light?'var(--text-helper)':'rgba(255,255,255,0.4)',
-          fontWeight:700,textTransform:'uppercase',
-          fontFamily:"'Sarabun', sans-serif",textDecoration:'none',
+          textDecoration:'none',overflow:'hidden',
         }}
         onMouseEnter={(e)=>{
           e.currentTarget.style.background='var(--accent)';
-          e.currentTarget.style.color='#fff';
           e.currentTarget.style.borderColor='var(--accent)';
           e.currentTarget.style.transform='translateY(-2px)';
         }}
         onMouseLeave={(e)=>{
           e.currentTarget.style.background=light?'var(--card)':'rgba(255,255,255,0.06)';
-          e.currentTarget.style.color=light?'var(--text-helper)':'rgba(255,255,255,0.4)';
           e.currentTarget.style.borderColor=light?'var(--border-light)':'rgba(255,255,255,0.1)';
           e.currentTarget.style.transform='translateY(0)';
         }}
-        title={s.name}>{s.label}</a>
+        title={s.name}>
+          <img src={s.icon} alt={s.name} style={{width:'55%',height:'55%',objectFit:'contain'}} />
+        </a>
       ))}
     </div>
   );
