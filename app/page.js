@@ -35,9 +35,10 @@ function Landing({ onSelect }) {
 
   // ── Social links ──
   const socialLinks = [
-    { name: 'github', url: 'https://ampickettdesign.github.io/', icon: '/github-icon.png' },
+    { name: 'portfolio', url: 'https://ampickettdesign.github.io/', icon: '/briefcase-icon.png' },
+    { name: 'github', url: 'https://github.com/AMPickettDesign', icon: '/github-icon.png' },
     { name: 'linkedin', url: 'https://www.linkedin.com/in/ashley-pickett-37444394/', icon: '/linkedin-icon.png' },
-    { name: 'instagram', url: 'https://www.instagram.com/ashdoesdesigns/', icon: '/briefcase-icon.png' },
+    { name: 'instagram', url: 'https://www.instagram.com/ashdoesdesigns/', icon: '/instagram-icon.png' },
     { name: 'pinterest', url: 'https://www.pinterest.com/TheAMPExperience/', icon: '/pinterest-icon.png' },
   ];
 
