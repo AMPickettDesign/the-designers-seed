@@ -134,7 +134,7 @@ function Landing({ onSelect }) {
 
             {/* Hero image — full width below content, portfolio card style */}
             <div className="animate-in-5" style={{
-              width:'100%',maxWidth:960,borderRadius:32,overflow:'hidden',
+              width:'100%',maxWidth:480,borderRadius:32,overflow:'hidden',
               border:'1px solid var(--border-light)',
               boxShadow:'0 20px 60px rgba(76,48,115,0.08)',
             }}>
