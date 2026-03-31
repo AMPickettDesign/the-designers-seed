@@ -286,7 +286,7 @@ button { font-family: 'Sarabun', sans-serif; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--text-helper); }
 
-/* ── Section label (portfolio style — dash prefix) ── */
+/* ── Section label (portfolio style) ── */
 .section-label {
   font-family: 'Sarabun', sans-serif;
   font-size: 0.8rem;
@@ -295,18 +295,6 @@ button { font-family: 'Sarabun', sans-serif; }
   letter-spacing: 0.15em;
   color: var(--accent);
   display: inline-block;
-  position: relative;
-  padding-left: 2rem;
-}
-.section-label::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 1.2rem;
-  height: 2px;
-  background: var(--accent);
 }
 
 /* ── Portfolio-matching button base ── */
